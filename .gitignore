@@ -1,0 +1,9 @@
+*.db
+*.pyc
+*~
+__pycache__
+.DS_Store
+.env
+.flaskenv
+.history
+env
