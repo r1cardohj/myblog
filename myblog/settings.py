@@ -6,6 +6,7 @@ class BaseConfig(object):
     SECRET_KEY = os.getenv('SERCERT_KEY','sercet string')
     
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    POST_PER_PAGE = 10
 
 
 class DevelopmentConfig(BaseConfig):

@@ -1,6 +1,13 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Flaskr</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block styles %}
+{{ bootstrap.load_css() }}
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock styles %}
+<title>{% block title %}R1cardohj's blog{% endblock %}</title>
+</head>
 <nav>
   <h1>R1cardo's blog</h1>
   <ul>
@@ -24,3 +31,8 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+{% block scripts %}
+{{ bootstrap.load_js() }}
+{{ moment.include_moment() }}
+{{ moment.locale('zh-cn')}}
+{% endblock %}
