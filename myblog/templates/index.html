@@ -2,21 +2,33 @@
 {% from 'bootstrap/pagination.html' import render_pagination %}
 
 {% block header %}
-  <h1>可恶!被发现了</h1>
-  
 {% endblock %}
 
 {% block content %}
-    {% for post in posts %}
-    <article class="post">
-        <header>
-            <div>
-              <h1>{{ post.title }}</h1>
-                <div class="about">{{ moment(post.timestamp).format('LL')}} </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8 post-area">
+        {% for post in posts %}
+        <article class="post ">
+            <header>
+                <div>
+                    <h1 class="post-title"><a href="#">{{ post.title }}</a></h1>
+                    <div class="about">{{ moment(post.timestamp).format('LL')}} </div>
+                </div>
+            </header>
+            <p class="body">{{ post.body[:255] }} ... </p>
+        </article>
+        {% endfor %}
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                {% include 'blog/_mycard.html' %}
             </div>
-        </header>
-        <p class="body">{{ post.body[:255] }} ... </p>
-    </article>
-    {% endfor %}
+            <div class="sidebar">
+                {% include 'blog/_sidebar.html' %}
+            </div>
+        </div>
+    </div>
     {{ render_pagination(pagination) }}
+</div>
 {% endblock %}

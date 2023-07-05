@@ -15,6 +15,7 @@ def create_app(config_name=None):
     register_extensions(app)
     register_blueprint(app)
     register_commands(app)
+    register_templates_context(app)
     return app
     
 def register_extensions(app):
@@ -61,6 +62,6 @@ def register_commands(app):
 def register_templates_context(app:Flask):
     @app.context_processor
     def make_template_context():
-        admin = Admin.query.frist()
-        category = Category.query.order_by(Category.name).all()
-        return dict(admin=admin, category=category)
+        admin = Admin.query.first() 
+        categories = Category.query.order_by(Category.name).all()
+        return dict(admin=admin, categories=categories)
