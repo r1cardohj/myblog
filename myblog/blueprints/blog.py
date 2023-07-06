@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,request,current_app
 from markupsafe import Markup
-from myblog.models import Post
+from myblog.models import Post,Comment
 
 blog_bp = Blueprint('blog',__name__)
 
@@ -12,3 +12,9 @@ def index():
     #posts = Post.query.order_by(Post.timestamp.desc()).limit(10).all()
     posts = pagination.items
     return render_template('index.html',posts=posts,pagination = pagination)
+
+@blog_bp.route('/post/<int:post_id>',methods = ['GET','POST'])
+def show_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    #page =request.args.get('page', type=int)
+    return render_template('blog/post.html',post=post)

@@ -8,17 +8,23 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-8 post-area">
-        {% for post in posts %}
-        <article class="post ">
-            <header>
-                <div>
-                    <h1 class="post-title"><a href="#">{{ post.title }}</a></h1>
-                    <div class="about">{{ moment(post.timestamp).format('LL')}} </div>
-                </div>
-            </header>
-            <p class="body">{{ post.body[:255] }} ... </p>
-        </article>
-        {% endfor %}
+        {% if posts %}
+            {% for post in posts %}
+            <article class="post ">
+                <header>
+                    <div>
+                        <h1 class="post-title"><a href="{{ url_for('.show_post', post_id=post.id ) }}">{{ post.title }}</a></h1>
+                        <div class="about">{{ moment(post.timestamp).format('LL')}} </div>
+                    </div>
+                </header>
+                <p class="body">{{ post.body|striptags|truncate }}</p> <!--这里这个过滤器蛮给力的-->
+            </article>
+            {% endfor %}
+        {% else %}
+            <div class="tip">
+                <h5>这个人很懒,还没写博客...</h5>
+            </div>
+        {% endif %}
         </div>
         <div class="col-sm-4">
             <div class="card">

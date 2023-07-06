@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ post.title }}
+{% endblock title %}
+{% block content %}
+<div class="page-header text-muted">
+    <h1 >{{ post.title }}</h1>
+    <small>
+        分类:  <a href="#">{{ post.category.name }}</a><br>
+        日期:  {{ moment(post.timestamp).format('LL') }}
+    </small>
+</div>
+<div class="row">
+    <div class="post-area post-detail">
+    <p>
+        {{post.body|safe}}
+    </p>
+    </div>
+</div>
+{% endblock content %}
