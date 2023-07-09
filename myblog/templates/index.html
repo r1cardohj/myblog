@@ -14,10 +14,15 @@
                 <header>
                     <div>
                         <h1 class="post-title"><a href="{{ url_for('.show_post', post_id=post.id ) }}">{{ post.title }}</a></h1>
-                        <div class="about">{{ moment(post.timestamp).format('LL')}} </div>
+                        <div class="about">    
+                                日期 : {{ moment(post.timestamp).format('LL')}} 
+                                &nbsp;分类 : <a href="#">{{ post.category.name }}</a>
+                                &nbsp;评论 : <a href="#">{{ post.comments|length}}</a>
+                        </div>
                     </div>
                 </header>
-                <p class="body">{{ post.body|striptags|truncate }}</p> <!--这里这个过滤器蛮给力的-->
+                <p class="body post-about">{{ post.body|striptags|truncate }}<small><a href="{{ url_for('.show_post', post_id=post.id ) }}">更多</a></small>
+                </p> 
             </article>
             {% endfor %}
         {% else %}

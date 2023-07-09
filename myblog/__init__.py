@@ -1,7 +1,7 @@
 import os
 import click
 from .blueprints import admin,auth,blog
-from .extensions import db,bootstrap,moment
+from .extensions import db,bootstrap,moment,login_manager,mail
 from .models import Admin,Category
 from .settings import config
 from flask import  Flask
@@ -22,6 +22,8 @@ def register_extensions(app):
     db.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
+    login_manager.init_app(app)
+    mail.init_app(app)
     
 
 def register_logging(app):
