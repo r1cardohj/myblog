@@ -34,9 +34,13 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .comment-card {margin-top: 5px;}
 .post-title {margin-top:40px;}
 .right {float:right;}
+.category-title {font-size: 24px;}
 small{
     font-size: 80%;
     font-weight: 400;
+}
+.detail-topic{
+    margin-top: 20px;
 }
 .comment-top {margin-bottom: 20px;margin-top: 50px;}
 input.danger { color: #cc2f2e; }

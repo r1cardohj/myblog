@@ -15,7 +15,7 @@ def index():
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page,per_page=8)
     #posts = Post.query.order_by(Post.timestamp.desc()).limit(10).all()
     posts = pagination.items
-    return render_template('index.html',posts=posts,pagination = pagination)
+    return render_template('blog/index.html',posts=posts,pagination = pagination)
 
 @blog_bp.route('/post/<int:post_id>',methods = ['GET','POST'])
 def show_post(post_id):
@@ -57,15 +57,15 @@ def show_post(post_id):
 
 @blog_bp.route('/category')
 def category():
-    return render_template('blog/category')
+    return render_template('blog/category.html')
 
 
 @blog_bp.route('/category/<int:category_id>')
 def show_category(category_id):
-    return render_template('category_detail.html')
+    return render_template('blog/category_detail.html')
 
 
 @blog_bp.route('/about')
 def about():
-    return render_template('blog/about')
+    return render_template('blog/about.html')
 
