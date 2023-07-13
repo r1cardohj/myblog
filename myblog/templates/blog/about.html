@@ -1,1 +1,37 @@
 {% extends "base.html" %}
+{% block content %}
+<div class="card mx-auto" style="width:400px">
+    <img class="card-img-top" src="{{ url_for('static',filename='img/yellowbean.jpg') }}" alt="Card image" style="width:100%">
+    <div class="card-body">
+    <h4 class="card-title">{{ admin.name }}</h4>
+    <p class="card-text">{{ admin.about }}</p>
+    </div>
+</div>
+<p class="card-text badge badge-secondary mt-5" style="font-size:large;">My project</p>
+<div class="row mt-3" >
+    <div class="col-sm-3">
+        <img src="{{ url_for('static',filename='img/wisher.jpg') }}" style="width: 200px;">        
+    </div>
+    <div class="col-sm-9">
+        <h5>wisher</h5>
+        <p>a wisher for someone you care</p>
+        <p class="badge badge-primary"></p>
+        <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:30%"></div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3" >
+    <div class="col-sm-3">
+        <img src="{{ url_for('static',filename='img/be_rich.jpg') }}" style="width: 200px;">        
+    </div>
+    <div class="col-sm-9">
+        <h5>be rich</h5>
+        <p>小目标:先赚100个</p>
+        <p class="badge badge-primary"></p>
+        <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:2%"></div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

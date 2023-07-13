@@ -6,7 +6,7 @@
 {% for category in  categories %} 
     <div class="card">
       <div class="card-header">
-        <i class="fa fa-hand-o-right" style="font-size:30px"></i>
+        <i class="fa fa-hand-o-right" style="font-size:28px"></i>
         <span class="category-title">
             <a class="card-link " data-toggle="collapse" href="#{{category.name}}">
                 &nbsp;&nbsp;{{ category.name }}
@@ -17,7 +17,7 @@
         <div class="list-group">
             {% for post in category.posts %}
                 <a href="{{ url_for('blog.show_post',post_id=post.id) }}" class="list-group-item list-group-item-action">
-                    <i class="fa fa-chevron-circle-right" style="font-size:22px"></i>
+                    <i class="fa fa-chevron-circle-right" style="font-size:18px"></i>
                     &nbsp;{{ post.title }}</a>
             {% endfor %}
         </div>

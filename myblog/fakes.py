@@ -11,8 +11,8 @@ def fake_admin():
         username= 'admin',
         blog_title='hjBlog',
         blog_sub_title='It is been a long time..',
-        name = 'FakeHJ',
-        about = 'hey')
+        name = 'Fake Yellow Bean',
+        about = '人生苦短,我用python')
     db.session.add(admin)
     db.session.commit()
 
@@ -70,7 +70,7 @@ def fake_comments(count=500):
         db.session.add(comment)
         
         comment = Comment(
-            author='FakeHJ',
+            author='Fake Yellow Bean',
             email='xxxxx@qq.com',
             site='mysite.com',
             body = fake.sentence(),
