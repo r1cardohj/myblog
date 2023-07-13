@@ -62,7 +62,9 @@ def category():
 
 @blog_bp.route('/category/<int:category_id>')
 def show_category(category_id):
-    return render_template('blog/category_detail.html')
+    category = Category.query.get_or_404(category_id)
+    posts = Post.query.filter_by(category_id=category_id).order_by(Post.timestamp.desc())
+    return render_template('blog/category_detail.html',category=category,posts = posts)
 
 
 @blog_bp.route('/about')
