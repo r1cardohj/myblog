@@ -1,6 +1,7 @@
 from myblog.extensions import db
 from datetime import datetime
 from flask_login import UserMixin
+from flask import url_for
 
 
 class Admin(db.Model,UserMixin):
@@ -20,7 +21,7 @@ class Category(db.Model):
 
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(60))
+    title = db.Column(db.String(60),unique =True)
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
@@ -41,3 +42,15 @@ class Comment(db.Model):
     replied_id = db.Column(db.Integer, db.ForeignKey('comment.id'))
     replied = db.relationship('Comment',back_populates='replies', remote_side=[id])
     replies = db.relationship('Comment',back_populates='replied',cascade='all')
+
+
+class Project(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(200),unique =True)
+    detail = db.Column(db.String(255))
+    progress = db.Column(db.Float)
+    pic_endpoint = db.Column(db.String(100))
+    url = db.Column(db.Text)
+    begin_time = db.Column(db.DateTime,default=datetime.utcnow)
+    deadline = db.Column(db.DateTime)
+    

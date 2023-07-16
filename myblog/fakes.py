@@ -1,10 +1,10 @@
 import random
-from .models import Admin,Category,Post,Comment
+from .models import Admin,Category,Post,Comment,Project
 from .extensions import db
 from sqlalchemy.exc import IntegrityError
 from faker import Faker
 
-fake = Faker()
+fake = Faker(locale='zh-CN')
 
 def fake_admin():
     admin = Admin(
@@ -93,4 +93,35 @@ def fake_comments(count=500):
         post = Post.query.get(random.randint(1, Post.query.count()))
         )
         db.session.add(comment)
+    db.session.commit()
+
+
+def fake_project(count = 3):
+    wisher = Project(
+        title = 'wisher',
+        progress = 40,
+        pic_endpoint = 'wisher',
+        url = fake.url(),
+        detail = 'a wisher for someone you care'
+    )
+    db.session.add(wisher)
+    
+    be_rich = Project(
+        title = 'be_rich',
+        progress = 1,
+        pic_endpoint = 'be_rich',
+        url = fake.url(),
+        detail = '小目标:先赚100个'
+    )
+    db.session.add(be_rich)
+    
+    for i in range(count):
+        project = Project(
+            title = fake.sentence(),
+            progress = fake.pydecimal(),
+            pic_endpoint = fake.word(),
+            url = fake.url()
+            
+        )
+        db.session.add(project)
     db.session.commit()

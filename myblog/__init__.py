@@ -1,8 +1,8 @@
 import os
 import click
 from .blueprints import admin,auth,blog
-from .extensions import db,bootstrap,moment,login_manager,mail
-from .models import Admin,Category
+from .extensions import db,bootstrap,moment,login_manager,mail,migrate
+from .models import Admin,Category,Project
 from .settings import config
 from flask import  Flask
 
@@ -24,6 +24,7 @@ def register_extensions(app):
     moment.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
+    migrate.init_app(app,db)
     
 
 def register_logging(app):
@@ -44,8 +45,9 @@ def register_commands(app):
     @click.option('--category',default=10,help='make categroy,10')
     @click.option('--post',default=50)
     @click.option('--comment',default=500)
-    def forge(category:int, post:int, comment:int) -> None:
-        from .fakes import fake_admin,fake_categories,fake_comments,fake_posts
+    @click.option('--project',default=3)
+    def forge(category:int, post:int, comment:int,project:int) -> None:
+        from .fakes import fake_admin,fake_categories,fake_comments,fake_posts,fake_project
     
         db.drop_all()
         db.create_all()
@@ -58,6 +60,8 @@ def register_commands(app):
         fake_posts(post)
         click.echo('init comments...')
         fake_comments(comment)
+        click.echo('init projects...')
+        fake_project(project)
         
         click.echo('Done!')
 
@@ -66,4 +70,5 @@ def register_templates_context(app:Flask):
     def make_template_context():
         admin = Admin.query.first() 
         categories = Category.query.order_by(Category.name).all()
-        return dict(admin=admin, categories=categories)
+        projects = Project.query.order_by(Project.begin_time).all()
+        return dict(admin=admin, categories=categories,projects = projects)
