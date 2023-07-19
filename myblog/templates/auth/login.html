@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+{% block content %}
+<div class="container">
+    <div class="mx-auto" style="width:150px">
+    <h1>login</h1>
+    </div>
+    {{ render_form(form) }}
+</div>s
+{% endblock content %}

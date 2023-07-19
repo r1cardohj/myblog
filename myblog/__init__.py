@@ -64,6 +64,42 @@ def register_commands(app):
         fake_project(project)
         
         click.echo('Done!')
+    
+    
+    @app.cli.command()
+    @click.option('--username',prompt=True)
+    @click.password_option()
+    def init(username,password):
+        '''创建管理员账户'''
+        click.echo('init db...')
+        db.create_all()
+        
+        admin = Admin.query.first()
+        if admin:
+            click.echo('the account for admin already exists,updating...')
+            admin.username = username
+            admin.set_password(password)
+        else:
+            click.echo('Creating account...')
+            admin = Admin(
+                username= username,
+                blog_title = "YellowBean's blog",
+                blog_sub_title = '可恶被你发现了',
+                name = 'Admin',
+                about = '十三线码农,想做一些温暖的东西.'
+            )
+            admin.set_password(password)
+        db.session.add(admin)
+        
+        category = Category.query.first()
+        if category is None:
+            click.echo('Creating category')
+            category = Category(name='default')
+            db.session.add(category)
+        
+        db.session.commit()
+        click.echo('Done.')
+        
 
 def register_templates_context(app:Flask):
     @app.context_processor

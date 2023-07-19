@@ -2,6 +2,7 @@ from myblog.extensions import db
 from datetime import datetime
 from flask_login import UserMixin
 from flask import url_for
+from werkzeug.security import generate_password_hash,check_password_hash
 
 
 class Admin(db.Model,UserMixin):
@@ -13,6 +14,11 @@ class Admin(db.Model,UserMixin):
     name = db.Column(db.String(30))
     about = db.Column(db.Text)
     
+    def set_password(self,password):
+        self.password_hash = generate_password_hash(password)
+    
+    def validate_password(self,password): 
+        return check_password_hash(self.password_hash,password) 
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
