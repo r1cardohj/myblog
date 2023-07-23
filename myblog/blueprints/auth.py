@@ -10,7 +10,8 @@ auth_bp = Blueprint('auth',__name__)
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('blog.index'))
+        flash('你已经登录','info')
+        return redirect_back()
     
     form = LoginForm()
     
@@ -36,6 +37,12 @@ def logout():
     logout_user()
     flash('Logout sucess.','info')
     return redirect_back()
+
+@auth_bp.route('/secret')
+@login_required
+def secret():
+    return 'only logined user can see'
+
 
 def redirect_back(default='blog.index',**kawrgs):
     for target in request.args.get('next'),request.referrer:

@@ -6,6 +6,7 @@
 {{ post.title }}
 {% endblock title %}
 {% block content %}
+<div  class= "mx-auto" style="width:880px">
 <div class="page-header text-muted">
     <h1 class="post-title">{{ post.title }}</h1>
     <small>
@@ -15,10 +16,11 @@
 </div>
 <div class="row">
     <div class="post-area post-detail col-sm-12">
-    <p>
+    <p style="line-height: 1.8;letter-spacing: 2px;">
         {{post.body|safe}}
     </p>
     </div>
+</div>
 </div>
 <div id="comment-form">
     {{ render_form(form, action=request.full_path) }}

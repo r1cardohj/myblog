@@ -13,16 +13,18 @@
             <article class="post ">
                 <header>
                     <div>
-                        <h1 class="post-title"><a href="{{ url_for('.show_post', post_id=post.id ) }}">{{ post.title }}</a></h1>
-                        <div class="about">    
+                        <h1 class="post-title" style="text-align: center;"><a href="{{ url_for('.show_post', post_id=post.id ) }}">{{ post.title }}</a></h1>
+                        <div class="about" style="text-align: center;">    
                                 日期 : {{ moment(post.timestamp).format('LL')}} 
                                 &nbsp;分类 : <a href="#">{{ post.category.name }}</a>
                                 &nbsp;评论 : <a href="#">{{ post.comments|length}}</a>
                         </div>
                     </div>
                 </header>
-                <p class="body post-about">{{ post.body|striptags|truncate }}<small><a href="{{ url_for('.show_post', post_id=post.id ) }}">更多</a></small>
-                </p> 
+                <div class="post-about">
+                <p class="" style="text-indent: 35px;line-height: 1.6;letter-spacing: 1px;">{{ post.body|striptags|truncate }}<small><a href="{{ url_for('.show_post', post_id=post.id ) }}">更多</a></small>
+                </p>
+                </div> 
             </article>
             {% endfor %}
         {% else %}

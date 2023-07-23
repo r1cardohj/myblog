@@ -1,10 +1,12 @@
 import os
 import click
 from .blueprints import admin,auth,blog
-from .extensions import db,bootstrap,moment,login_manager,mail,migrate
-from .models import Admin,Category,Project
+from .extensions import db,bootstrap,moment,login_manager,mail,migrate,csrf
+from .models import Admin,Category,Project,Comment
 from .settings import config
-from flask import  Flask
+from flask import  Flask,render_template
+from flask_login import current_user
+from flask_wtf.csrf import CSRFError
 
 def create_app(config_name=None):
     if config_name is None:
@@ -15,6 +17,7 @@ def create_app(config_name=None):
     register_extensions(app)
     register_blueprint(app)
     register_commands(app)
+    register_errors(app)
     register_templates_context(app)
     return app
     
@@ -25,6 +28,7 @@ def register_extensions(app):
     login_manager.init_app(app)
     mail.init_app(app)
     migrate.init_app(app,db)
+    csrf.init_app(app)
     
 
 def register_logging(app):
@@ -86,7 +90,7 @@ def register_commands(app):
                 blog_title = "YellowBean's blog",
                 blog_sub_title = '可恶被你发现了',
                 name = 'Admin',
-                about = '十三线码农,想做一些温暖的东西.'
+                about = 'biubiubiubiu'
             )
             admin.set_password(password)
         db.session.add(admin)
@@ -107,4 +111,28 @@ def register_templates_context(app:Flask):
         admin = Admin.query.first() 
         categories = Category.query.order_by(Category.name).all()
         projects = Project.query.order_by(Project.begin_time).all()
-        return dict(admin=admin, categories=categories,projects = projects)
+        if current_user.is_authenticated:
+            unread_comments = Comment.query.filter_by(reviewed=False).count()
+        else:
+            unread_comments = None
+        return dict(admin=admin, categories=categories,
+                    projects = projects,unread_comments=unread_comments)
+
+
+def register_errors(app:Flask):
+    @app.errorhandler(400)
+    def bad_request(e):
+        return render_template('errors/400.html'), 400
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('errors/404.html'), 404
+
+    @app.errorhandler(500)
+    def internal_server_error(e):
+        return render_template('errors/500.html'), 500
+    
+    @app.errorhandler(CSRFError)
+    def handle_csrf_error(e):
+        return render_template('errors/400.html',description=e.description),400
+    

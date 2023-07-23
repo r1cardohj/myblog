@@ -5,6 +5,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_migrate import Migrate
 from flask import current_app
+from flask_wtf import CSRFProtect
 
 #template thing init
 bootstrap = Bootstrap4()
@@ -29,6 +30,7 @@ login_manager.login_message = u'请先登录'
 
 # mail init
 mail = Mail()
-#
+# safe init
+csrf = CSRFProtect()
 
 

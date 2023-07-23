@@ -28,3 +28,5 @@ class PostForm(FlaskForm):
     '''创建文章窗口'''
     title = StringField('Title',validators=[DataRequired(),Length(1,60)])
     category = SelectField('Category',coerce=int, default=1)
+    body = TextAreaField('body',validators=[DataRequired()])
+    submit = SubmitField('Submit')
