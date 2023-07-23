@@ -6,6 +6,8 @@ from flask_mail import Mail
 from flask_migrate import Migrate
 from flask import current_app
 from flask_wtf import CSRFProtect
+from flask_pagedown import PageDown
+from flask_ckeditor import CKEditor
 
 #template thing init
 bootstrap = Bootstrap4()
@@ -32,5 +34,8 @@ login_manager.login_message = u'请先登录'
 mail = Mail()
 # safe init
 csrf = CSRFProtect()
+#markdown
+pagedown = PageDown()
+ckeditor = CKEditor()
 
 

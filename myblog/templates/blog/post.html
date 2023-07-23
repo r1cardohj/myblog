@@ -17,7 +17,11 @@
 <div class="row">
     <div class="post-area post-detail col-sm-12">
     <p style="line-height: 1.8;letter-spacing: 2px;">
-        {{post.body|safe}}
+        {% if post.body_html %}
+            {{ post.body_html | safe}}
+        {% else %}
+            {{post.body|safe}}
+        {% endif %}
     </p>
     </div>
 </div>

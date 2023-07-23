@@ -3,6 +3,7 @@ from datetime import datetime
 from flask_login import UserMixin
 from flask import url_for
 from werkzeug.security import generate_password_hash,check_password_hash
+from markdown import markdown
 
 
 class Admin(db.Model,UserMixin):
@@ -29,10 +30,17 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(60),unique =True)
     body = db.Column(db.Text)
+    body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
     category = db.relationship('Category',back_populates='posts')
     comments = db.relationship('Comment',back_populates = 'post', cascade='all,delete-orphan')
+    
+    @staticmethod
+    def on_changed_body(target, value, oldvalue, initiator):
+        target.body_html = markdown(value, output_format='html')
+
+db.event.listen(Post.body, 'set', Post.on_changed_body)
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
