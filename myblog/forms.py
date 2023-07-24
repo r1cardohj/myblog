@@ -32,6 +32,12 @@ class PostForm(FlaskForm):
     category = SelectField('Category',coerce=int, 
                            default=1
                            )
-    body = PageDownField('body',validators=[DataRequired()])
+    #body = PageDownField('body',validators=[DataRequired()])
+    body = TextAreaField('body',validators = [DataRequired()])
     submit = SubmitField('Submit')
+    
+    def __init__(self, *args, **kwargs):
+        super(PostForm, self).__init__(*args, **kwargs)
+        self.category.choices = [(category.id, category.name)
+                                 for category in Category.query.order_by(Category.name).all()]
     

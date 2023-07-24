@@ -22,7 +22,13 @@
                     </div>
                 </header>
                 <div class="post-about">
-                <p class="" style="text-indent: 35px;line-height: 1.6;letter-spacing: 1px;">{{ post.body|striptags|truncate }}<small><a href="{{ url_for('.show_post', post_id=post.id ) }}">更多</a></small>
+                <p class="" style="text-indent: 35px;line-height: 1.6;letter-spacing: 1px;">
+                    {% if post.body_html %}
+                    {{ post.body_html|striptags|truncate }}
+                    {% else %}
+                    {{ post.body|striptags|truncate }}
+                    {% endif %}
+                    <small><a href="{{ url_for('.show_post', post_id=post.id ) }}">更多</a></small>
                 </p>
                 </div> 
             </article>

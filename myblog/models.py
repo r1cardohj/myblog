@@ -35,10 +35,12 @@ class Post(db.Model):
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
     category = db.relationship('Category',back_populates='posts')
     comments = db.relationship('Comment',back_populates = 'post', cascade='all,delete-orphan')
+    #summary = db.Column(db.String(255))
     
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
-        target.body_html = markdown(value, output_format='html')
+        target.body_html = markdown(value, output_format='html',extensions=['markdown.extensions.fenced_code',
+                                                                            'markdown.extensions.codehilite'])
 
 db.event.listen(Post.body, 'set', Post.on_changed_body)
 

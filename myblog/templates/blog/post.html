@@ -2,6 +2,11 @@
 {% from 'bootstrap/pagination.html' import render_pagination %}
 {% from 'bootstrap/form.html' import render_form %}
 
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='editormd/css/editormd.preview.min.css') }}" rel="stylesheet" />  
+<link href="{{ url_for('static', filename='editormd/css/editormd.css') }}" rel="stylesheet" /> 
+{% endblock styles %}
 {% block title %}
 {{ post.title }}
 {% endblock title %}
@@ -15,7 +20,7 @@
     </small>
 </div>
 <div class="row">
-    <div class="post-area post-detail col-sm-12">
+    <div class="post-area post-detail col-sm-12" id="fancy-content">
     <p style="line-height: 1.8;letter-spacing: 2px;">
         {% if post.body_html %}
             {{ post.body_html | safe}}
@@ -71,3 +76,12 @@
     {{ render_pagination(pagination,fragment='#comments') }}
 {% endif %}
 {% endblock content %}
+{% block scripts %}
+   {{ super() }}
+   <script type="text/javascript" src="{{ url_for('static', filename='editormd/lib/marked.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='editormd/lib/prettify.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='editormd/editormd.min.js') }}"></script>
+    <script type="text/javascript">
+        editormd.markdownToHTML("fancy-content");
+    </script>
+{% endblock scripts %}

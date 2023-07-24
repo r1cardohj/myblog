@@ -1,6 +1,11 @@
 {% extends "base.html" %}
-{% from 'bootstrap/form.html' import render_form %}
+{% from 'bootstrap/form.html' import render_field %}
 
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static',filename='editormd/css/editormd.css') }}"/>
+{% endblock styles %}
 {% block title %}
   New Post
 {% endblock title %}
@@ -8,9 +13,30 @@
   <div class="page-header">
     <h1>New Post</h1>
   </div>
-  {{ render_form(form) }}
+  <form method="post">
+    {{ form.csrf_token() }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.category) }}
+    <div id="fancy-editormd" class="editormd">
+        {{ form.body(style="display:none;") }}
+    </div>
+    {{ render_field(form.submit) }}
+</form>
 {% endblock content %}
 {% block scripts %}
 {{ super() }}
-{{ pagedown.include_pagedown() }}
+<script src="{{ url_for('static',filename='editormd/examples/js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+<script type="text/javascript">
+    $(function () {
+        editormd("fancy-editormd", {
+            // width: "100%", 请不要添加
+            height: 640,
+            syncScrolling: "single",
+            path: "{{ url_for('static',filename='editormd/lib/') }}",
+            saveHTMLToTextarea : true
+        });
+    });
+</script>
+<!--{{ pagedown.include_pagedown() }}-->
 {% endblock scripts %}

@@ -51,6 +51,3 @@ small{
 .comment-top {margin-bottom: 20px;margin-top: 50px;}
 input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: start; min-width: 10em; }
-th,td{
-    text-align: center;
-}
