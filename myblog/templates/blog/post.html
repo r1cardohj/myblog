@@ -64,7 +64,20 @@
                     </p>
                 {% endif %}
                 <p class="card-text">{{ comment.body}}</p>
-                <div class="card-link float-right"><a href="#" class="btn btn-primary btn-sm card-link">回复</a></div>
+                <div class="card-link float-right">
+                    {% if current_user.is_authenticated %}
+                    <form style="display: inline;" method="post"
+                        action="{{ url_for('admin.delete_comment',comment_id=comment.id,
+                                next=request.full_path) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type = 'submit' class="btn btn-danger btn-sm"
+                        onclick="return confirm('Are you sure?');">删除
+                    </button>
+                    </form>
+                {% endif %}
+                    <a href="#" class="btn btn-primary btn-sm card-link">回复</a>
+                </div>
+                
             </div>
         </div>
         {% endfor %}

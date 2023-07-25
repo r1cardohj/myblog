@@ -1,7 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,TextAreaField,PasswordField,BooleanField,SelectField,HiddenField
 from wtforms.validators import DataRequired,Email,Length
-from flask_pagedown.fields import PageDownField
 from .models import Category
 
 class CommentForm(FlaskForm):

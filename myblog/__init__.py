@@ -1,7 +1,7 @@
 import os
 import click
 from .blueprints import admin,auth,blog
-from .extensions import db,bootstrap,moment,login_manager,mail,migrate,csrf,pagedown,ckeditor
+from .extensions import db,bootstrap,moment,login_manager,mail,migrate,csrf
 from .models import Admin,Category,Project,Comment
 from .settings import config
 from flask import  Flask,render_template
@@ -29,8 +29,6 @@ def register_extensions(app):
     mail.init_app(app)
     migrate.init_app(app,db)
     csrf.init_app(app)
-    pagedown.init_app(app)
-    ckeditor.init_app(app)
     
 
 def register_logging(app):

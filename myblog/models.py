@@ -40,7 +40,9 @@ class Post(db.Model):
     @staticmethod
     def on_changed_body(target, value, oldvalue, initiator):
         target.body_html = markdown(value, output_format='html',extensions=['markdown.extensions.fenced_code',
-                                                                            'markdown.extensions.codehilite'])
+                                                                            'markdown.extensions.codehilite',
+                                                                            'markdown.extensions.toc',
+                                                                            'markdown.extensions.tables'])
 
 db.event.listen(Post.body, 'set', Post.on_changed_body)
 
