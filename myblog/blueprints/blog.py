@@ -40,10 +40,16 @@ def show_post(post_id):
         author = form.author.data
         email = form.author.data
         body = form.body.data
+        replied_id = request.args.get('reply')
+        
         comment = Comment(
             author=author,email=email,body=body,
             from_admin=from_admin,post=post,reviewed=reviewed
         )
+        if replied_id:
+            replied_comment = Comment.query.get_or_404(replied_id)
+            comment.replied = replied_comment
+        #发邮件给用户吗?
         db.session.add(comment)
         db.session.commit()
         if current_user.is_authenticated:
@@ -53,6 +59,12 @@ def show_post(post_id):
             send_comment_mail_to_admin(post)
         return redirect(url_for('blog.show_post',post_id=post_id))
     return render_template('blog/post.html',post=post,pagination=pagination,comments=comments,form=form)
+
+
+@blog_bp.route('/reply/comment/<int:comment_id>')
+def reply_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    return redirect(url_for('blog.show_post',post_id=comment.post_id,reply=comment_id,author=comment.author)+'#comment-form')
 
 
 @blog_bp.route('/category')

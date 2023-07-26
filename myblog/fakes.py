@@ -111,7 +111,7 @@ def fake_project(count = 3):
         progress = 1,
         pic_endpoint = 'be_rich',
         url = fake.url(),
-        detail = '小目标:先赚100个'
+        detail = '请我喝个三得利乌龙茶不？'
     )
     db.session.add(be_rich)
     

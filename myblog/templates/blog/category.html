@@ -11,6 +11,16 @@
             <a class="card-link " data-toggle="collapse" href="#{{category.name}}">
                 &nbsp;&nbsp;{{ category.name }}
             </a>
+            {% if current_user.is_authenticated %}
+            <form  method="post" class="float-right"
+                        action="{{ url_for('admin.delete_category',category_id=category.id,
+                                next=request.full_path) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type = 'submit' class="btn btn-danger btn-sm"
+                        onclick="return confirm('Are you sure?');">删除
+                    </button>
+            </form>
+            {% endif %}
         </span>
       </div>
       <div id="{{category.name}}" class="collapse" data-parent="#accordion">

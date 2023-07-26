@@ -31,13 +31,24 @@
     </div>
 </div>
 </div>
+{% if post.can_comment %}
 <div id="comment-form">
+    {% if request.args.get('reply') %}
+    <div class="alert alert-dark">
+        Reply to <strong> {{ request.args.get('author') }}</strong>:
+        <a class="float-right" href="{{ url_for('.show_post', post_id=post.id) }}">Cancel</a>
+    </div>
+    {% endif %}
     {{ render_form(form, action=request.full_path) }}
 </div>
+{% else%}
+    <div class="tip"><h5>Comment disabled.</h5></div>
+{% endif %}
+
 <div class="comments" id="comments">
     <h3 class="comment-top">&nbsp;评论&nbsp;<span class="badge badge-secondary">{{ pagination.total }}</span> 
         <small class="float-right">
-            <a href="{{ url_for('blog.show_post',post_id=post.id, page=pagination.page or 1)}}#comments">最新评论</a>
+            <a href="{{ url_for('blog.show_post',post_id=post.id, page=pagination.pages or 1)}}#comments">最新评论</a>
         </small>
     </h3>
     {% if comments %}
@@ -75,7 +86,7 @@
                     </button>
                     </form>
                 {% endif %}
-                    <a href="#" class="btn btn-primary btn-sm card-link">回复</a>
+                    <a href="{{ url_for('blog.reply_comment',comment_id=comment.id)}}" class="btn btn-primary btn-sm card-link">回复</a>
                 </div>
                 
             </div>

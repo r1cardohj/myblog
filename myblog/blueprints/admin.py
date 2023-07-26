@@ -72,3 +72,57 @@ def delete_comment(comment_id):
     db.session.commit()
     flash('评论已删除')
     return redirect_back()
+
+
+@admin_bp.post('/set-comment/<int:post_id>')
+@login_required
+def set_comment(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.can_comment:
+        post.can_comment = False
+        flash('Comment disable.','info')
+    else:
+        post.can_comment = True
+        flash('Comment enable','info')
+    db.session.commit()
+    return redirect(url_for('blog.show_post',post_id=post_id))
+
+@admin_bp.route('/comment/manage')
+@login_required
+def manage_comment():
+    filter_rule = request.args.get('filter','all')
+    page = request.args.get('page',1,type=int)
+    per_page = current_app.config.get('COMMENT_PER_PAGE',10)
+    if filter_rule == 'unread':
+        filter_comments = Comment.query.filter_by(reviewed=False)
+    elif filter_rule == 'admin':
+        filter_comments = Comment.query.filter_by(from_admin=True)
+    else:
+        filter_comments = Comment.query
+        
+    pagination = filter_comments.order_by(Comment.timestamp.desc()).paginate(page=page,per_page=per_page)
+    comments = pagination.items
+    return render_template('admin/manage_comment.html',comments=comments,pagination=pagination)
+
+
+@admin_bp.post('/comment/approve/<int:comment_id>')
+@login_required
+def approve_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    if comment.reviewed == False:
+        comment.reviewed = True
+        flash('Success.')
+    db.session.commit()
+    return redirect(url_for('admin.categ',filter='unread'))
+
+
+@admin_bp.post('/category/<int:category_id>/delete')
+@login_required
+def delete_category(category_id):
+    category = Category.query.get_or_404(category_id)
+    if category.id == 1:
+        flash('You can not delete the defult category','warning')
+        return redirect(url_for('blog.index'))
+    category.delete()
+    flash('Category deleted.','success')
+    return redirect(url_for('blog.index'))
