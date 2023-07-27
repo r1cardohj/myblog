@@ -39,4 +39,9 @@ class PostForm(FlaskForm):
         super(PostForm, self).__init__(*args, **kwargs)
         self.category.choices = [(category.id, category.name)
                                  for category in Category.query.order_by(Category.name).all()]
-    
+
+
+class CategoryForm(FlaskForm):
+    """创建分类窗口"""
+    name = StringField('Name',validators=[DataRequired(),Length(1,20)])
+    submit = SubmitField('Submit')

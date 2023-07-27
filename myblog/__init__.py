@@ -7,6 +7,7 @@ from .settings import config
 from flask import  Flask,render_template
 from flask_login import current_user
 from flask_wtf.csrf import CSRFError
+from flask_migrate import upgrade
 
 def create_app(config_name=None):
     if config_name is None:
@@ -103,6 +104,7 @@ def register_commands(app):
         
         db.session.commit()
         click.echo('Done.')
+         
         
 
 def register_templates_context(app:Flask):

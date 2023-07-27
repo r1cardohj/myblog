@@ -16,7 +16,7 @@
                         <h1 class="post-title" style="text-align: center;"><a href="{{ url_for('.show_post', post_id=post.id ) }}">{{ post.title }}</a></h1>
                         <div class="about" style="text-align: center;">    
                                 日期 : {{ moment(post.timestamp).format('LL')}} 
-                                &nbsp;分类 : <a href="#">{{ post.category.name }}</a>
+                                &nbsp;分类 : <a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a>
                                 &nbsp;评论 : <a href="#">{{ post.comments|length}}</a>
                         </div>
                     </div>

@@ -3,7 +3,7 @@ from flask_login import login_required
 from ..models import Post,Category,Comment
 from ..extensions import db
 from .auth import redirect_back
-from ..forms import PostForm
+from ..forms import PostForm,CategoryForm
 
 
 
@@ -126,3 +126,18 @@ def delete_category(category_id):
     category.delete()
     flash('Category deleted.','success')
     return redirect(url_for('blog.index'))
+
+
+@admin_bp.route('/category/new',methods=['POST','GET'])
+@login_required
+def new_category():
+    form = CategoryForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        category = Category(name=name)
+        db.session.add(category)
+        db.session.commit()
+        flash(f'<{name}> created','success')
+        return redirect(url_for('blog.category'))    
+    
+    return render_template('admin/new_category.html',form=form)

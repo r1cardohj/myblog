@@ -31,7 +31,7 @@
               <span class="badge badge-success">{{ unread_comments }}</span>
             {% endif %}
           </a>
-          <!--<a class="dropdown-item" href="#">分类</a>-->
+          <a class="dropdown-item" href="{{ url_for('admin.new_category') }}">新分类</a>
         </div>
       </li>  
     {% endif %}
