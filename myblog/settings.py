@@ -1,6 +1,13 @@
 import os
+import sys
 
 baseidr = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
+WIN = sys.platform.startswith('win')
+if WIN:  
+    prefix = 'sqlite:///'
+else:  
+    prefix = 'sqlite:////'
 
 class BaseConfig(object):
     SECRET_KEY = os.getenv('SERCERT_KEY','sercet string')   
@@ -28,7 +35,7 @@ class TestingConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL','sqlite:///' + os.path.join(baseidr,'data.db'))
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL',prefix + os.path.join(baseidr,'data.db'))
 
 
 config = {

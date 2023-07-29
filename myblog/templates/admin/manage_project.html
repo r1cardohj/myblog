@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}
+    项目管理
+{% endblock title %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Project
+        <small class="text-muted">{{ projects | length }}</small>
+        <span class="float-right"><a class="btn btn-primary btn-sm" href="{{ url_for('admin.new_post')}}">New</a></span>
+    </h1>
+</div>
+{% if projects %}
+<table class="table table-striped">
+    <thead class="thead-light">
+      <tr>
+        <th class="center">id</th>
+        <th class="center">Title</th>
+        <th class="center">progress</th>
+        <th class="center">pic_endpoint</th>
+        <th class="center">url</th>
+        <th class="center">begin_time</th>
+        <th class="center">deadline</th>
+        <th class="center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for project in projects %}
+          <tr>
+            <td class="center">{{ project.id }}</td>
+            <td class="center">{{ project.title }}</td>
+            <td class="center">{{ project.progress }}%</td>
+            <td class="center">{{ project.pic_endpoint }}</td>
+            <td class="center"><a href="{{ project.url }}">link</a></td>
+            <td class="center">{{ project.begin_time }}</td>
+            <td class="center">{{ project.deadline }}</td>
+            <td class="center">
+                <a class="btn btn-info btn-sm" href="{{ url_for('admin.edit_project',project_id=project.id) }}">Edit</a>
+                <form class="inline" method="post" style="display: inline;"
+                    action="{{ url_for('admin.delete_project',project_id=project.id,next=request.full_path) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('确定要删除吗?')">Del
+                    </button>
+                </form>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+{% else %}
+<div class="tip"><h5>你还没有创建项目</h5></div>
+{% endif %}
+{% endblock content %}

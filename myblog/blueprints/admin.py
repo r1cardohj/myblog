@@ -1,9 +1,9 @@
 from flask import Blueprint,request,current_app,render_template,flash,redirect,url_for
 from flask_login import login_required
-from ..models import Post,Category,Comment
+from ..models import Post,Category,Comment,Project
 from ..extensions import db
 from .auth import redirect_back
-from ..forms import PostForm,CategoryForm
+from ..forms import PostForm,CategoryForm,ProjectForm
 
 
 
@@ -141,3 +141,45 @@ def new_category():
         return redirect(url_for('blog.category'))    
     
     return render_template('admin/new_category.html',form=form)
+
+
+@admin_bp.route('/project/manage')
+@login_required
+def manage_project():
+    return render_template('admin/manage_project.html')
+
+
+@admin_bp.route('/project/edit/<int:project_id>',methods=['GET','POST'])
+@login_required
+def edit_project(project_id):
+    project = Project.query.get_or_404(project_id)
+    form = ProjectForm()
+    if form.validate_on_submit():
+        project.title = form.title.data
+        project.detail = form.detail.data
+        project.progress = form.detail.data
+        project.pic_endpoint = form.detail.data
+        project.url = form.detail.data
+        project.begin_time = form.detail.data
+        project.deadline = form.detial.data
+        db.session.commit()
+        flash('Success.','success')
+        redirect(url_for('admin.manage_project'))
+    form.title.data = project.title
+    form.detail.data = project.detail
+    form.progress.data = project.progress
+    form.pic_endpoint.data = project.pic_endpoint
+    form.url.data = project.url
+    form.begin_time.data = project.begin_time
+    form.deadline.data = project.deadline
+    return render_template('admin/edit_project.html',form=form)
+
+
+@admin_bp.post('/project/delete/<int:project_id>')
+@login_required
+def delete_project(project_id):
+    project = Project.query.get_or_404(project_id)
+    db.session.delete(project)
+    db.session.commit()
+    flash('del success')
+    return redirect(url_for('admin.manage_project'))

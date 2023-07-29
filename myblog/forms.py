@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,TextAreaField,PasswordField,BooleanField,SelectField,HiddenField
+from wtforms import StringField,SubmitField,TextAreaField,PasswordField,\
+    BooleanField,SelectField,HiddenField,IntegerField,URLField,DateTimeField
 from wtforms.validators import DataRequired,Email,Length
 from .models import Category
 
@@ -45,3 +46,14 @@ class CategoryForm(FlaskForm):
     """创建分类窗口"""
     name = StringField('Name',validators=[DataRequired(),Length(1,20)])
     submit = SubmitField('Submit')
+    
+
+class ProjectForm(FlaskForm):
+    title = StringField('Title',validators=[DataRequired(),Length(1,20)])
+    detail = StringField('Detail',validators=[DataRequired(),Length(1,255)])
+    progress = IntegerField('progress',validators=[DataRequired(),Length(1,100)])
+    pic_endpoint = StringField('Pic_endpoint',validators=[DataRequired(),Length(1,100)])
+    url = URLField('URL',validators=[DataRequired(),Length(1,200)])
+    begin_time = DateTimeField('URL')
+    deadline = DateTimeField('Deadline')
+    
