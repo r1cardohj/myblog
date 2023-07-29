@@ -11,16 +11,19 @@
 {{ post.title }}
 {% endblock title %}
 {% block content %}
-<div  class= "mx-auto" style="width:880px">
+<div class="col-sm-12">
+<div  class= "mx-auto">
+    
 <div class="page-header text-muted">
-    <h1 class="post-title">{{ post.title }}</h1>
+    <h2 class="post-title">{{ post.title }}</h2>
+    <hr>
     <small>
-        分类:  <a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a><br>
+        分类:  <span class="badge badge-light"><a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span><br>
         日期:  {{ moment(post.timestamp).format('LL') }}
     </small>
 </div>
 <div class="row">
-    <div class="post-area post-detail col-sm-12" id="fancy-content">
+    <div class="" id="fancy-content">
     <p style="line-height: 1.8;letter-spacing: 2px;">
         {% if post.body_html %}
             {{ post.body_html | safe}}
@@ -99,6 +102,7 @@
 {% if comments %}
     {{ render_pagination(pagination,fragment='#comments') }}
 {% endif %}
+</div>
 {% endblock content %}
 {% block scripts %}
    {{ super() }}

@@ -83,3 +83,6 @@ def show_category(category_id):
 def about():
     return render_template('blog/about.html')
 
+@blog_bp.route('/coffee')
+def coffee():
+    return render_template('blog/coffee.html')

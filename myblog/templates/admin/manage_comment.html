@@ -30,6 +30,7 @@
     </div>
 
     {% if comments %}
+    <div class="table-responsive">
         <table class="table table-striped">
             <thead>
             <tr>
@@ -82,4 +83,5 @@
     {% else %}
         <div class="tip"><h5>No comments.</h5></div>
     {% endif %}
+</div>
 {% endblock %}

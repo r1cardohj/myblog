@@ -1,9 +1,9 @@
 from flask import Blueprint,request,current_app,render_template,flash,redirect,url_for
 from flask_login import login_required
-from ..models import Post,Category,Comment,Project
+from ..models import Post,Category,Comment,Project,Admin
 from ..extensions import db
 from .auth import redirect_back
-from ..forms import PostForm,CategoryForm,ProjectForm
+from ..forms import PostForm,CategoryForm,ProjectForm,SettingsForm
 
 
 
@@ -113,7 +113,7 @@ def approve_comment(comment_id):
         comment.reviewed = True
         flash('Success.')
     db.session.commit()
-    return redirect(url_for('admin.categ',filter='unread'))
+    return redirect(url_for('admin.manage_comment',filter='unread'))
 
 
 @admin_bp.post('/category/<int:category_id>/delete')
@@ -157,11 +157,11 @@ def edit_project(project_id):
     if form.validate_on_submit():
         project.title = form.title.data
         project.detail = form.detail.data
-        project.progress = form.detail.data
-        project.pic_endpoint = form.detail.data
-        project.url = form.detail.data
-        project.begin_time = form.detail.data
-        project.deadline = form.detial.data
+        project.progress = form.progress.data
+        project.pic_endpoint = form.pic_endpoint.data
+        project.url = form.url.data
+        project.begin_time = form.begin_time.data
+        project.deadline = form.deadline.data
         db.session.commit()
         flash('Success.','success')
         redirect(url_for('admin.manage_project'))
@@ -183,3 +183,18 @@ def delete_project(project_id):
     db.session.commit()
     flash('del success')
     return redirect(url_for('admin.manage_project'))
+
+
+@admin_bp.route('/settings',methods=['GET','POST'])
+@login_required
+def settings():
+    form = SettingsForm()
+    admin = Admin.query.first()
+    if form.validate_on_submit():
+        admin.name = form.name.data
+        admin.about = form.about.data
+        db.session.commit()
+        flash('change.')
+        return redirect(url_for('blog.about'))
+    return render_template('admin/settings.html',form=form)
+        

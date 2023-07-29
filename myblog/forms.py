@@ -54,6 +54,12 @@ class ProjectForm(FlaskForm):
     progress = IntegerField('progress',validators=[DataRequired(),Length(1,100)])
     pic_endpoint = StringField('Pic_endpoint',validators=[DataRequired(),Length(1,100)])
     url = URLField('URL',validators=[DataRequired(),Length(1,200)])
-    begin_time = DateTimeField('URL')
+    begin_time = DateTimeField('Begin_time')
     deadline = DateTimeField('Deadline')
-    
+    submit = SubmitField('Submit')
+
+
+class SettingsForm(FlaskForm):
+    name = StringField('Name',validators=[DataRequired(),Length(1,50)])
+    about = StringField('About',validators=[DataRequired(),Length(1,255)])
+    submit = SubmitField('Submit')

@@ -19,7 +19,7 @@ nav ul li a, nav ul li span, header .action { display: block; padding: 0.5rem; }
 .post > header { display: flex; align-items: flex-end; font-size: 0.85em; }
 .post > header > div:first-of-type { flex: auto; }
 .post > header h1 { font-size: 1.7em; margin-bottom: 0; font-family:Helvetica Neue,Helvetica,WenQuanYi Micro Hei,Arial,sans-serif;}
-.post .about { color: slategray; font-style: italic;}
+.post .about { color: slategray;}
 .post .body { white-space: pre-line;font-family: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
             color:#3E4349;}
 .content:last-child { margin-bottom: 0; }
