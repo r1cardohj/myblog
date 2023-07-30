@@ -47,8 +47,8 @@
                     <td>
                         {% if comment.from_admin %}{{ admin.name }}{% else %}{{ comment.author }}{% endif %}<br>
                         {% if comment.site %}
-                            <a href="{{ comment.site }}" target="_blank">
-                                {{ comment.site }}
+                            <a href="{{ comment.email }}" target="_blank">
+                                {{ comment.email }}
                             </a><br>
                         {% endif %}
                         <a href="mailto:{{ comment.email }}">{{ comment.email }}</a>
