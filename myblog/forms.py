@@ -51,7 +51,7 @@ class CategoryForm(FlaskForm):
 class ProjectForm(FlaskForm):
     title = StringField('Title',validators=[DataRequired(),Length(1,20)])
     detail = StringField('Detail',validators=[DataRequired(),Length(1,255)])
-    progress = IntegerField('progress',validators=[DataRequired(),Length(1,100)])
+    progress = IntegerField('progress',validators=[DataRequired()])
     pic_endpoint = StringField('Pic_endpoint',validators=[DataRequired(),Length(1,100)])
     url = URLField('URL',validators=[DataRequired(),Length(1,200)])
     begin_time = DateTimeField('Begin_time')

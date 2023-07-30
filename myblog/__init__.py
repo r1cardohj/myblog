@@ -135,6 +135,7 @@ def register_commands(app):
             click.echo('Creating category')
             category = Category(name='default')
             db.session.add(category)
+            
         
         db.session.commit()
         click.echo('Done.')

@@ -4,6 +4,7 @@ from ..models import Post,Category,Comment,Project,Admin
 from ..extensions import db
 from .auth import redirect_back
 from ..forms import PostForm,CategoryForm,ProjectForm,SettingsForm
+from datetime import datetime
 
 
 
@@ -148,6 +149,32 @@ def new_category():
 def manage_project():
     return render_template('admin/manage_project.html')
 
+
+@admin_bp.route('/project/new/',methods=['GET','POST'])
+@login_required
+def new_project():
+    form = ProjectForm()
+    form.begin_time.data = datetime.utcnow()
+    form.deadline.data = datetime.utcnow()
+    if form.validate_on_submit():
+        title = form.title.data
+        detail = form.detail.data
+        progress = form.progress.data
+        pic_endpoint = form.pic_endpoint.data
+        url = form.url.data
+        deadline = form.deadline.data
+        project = Project(title=title,
+                            detail=detail,
+                            progress=progress,
+                            pic_endpoint=pic_endpoint,
+                            url=url,
+                            deadline=deadline
+                            )
+        db.session.add(project)
+        db.session.commit()
+        flash('created.')
+        redirect(url_for('admin.manage_project'))
+    return render_template('admin/new_project.html',form=form)
 
 @admin_bp.route('/project/edit/<int:project_id>',methods=['GET','POST'])
 @login_required
