@@ -76,9 +76,6 @@ input[type=submit] { align-self: start; min-width: 10em; }
     .reply-body{
         font-size: 13px;
     }
-    .comment-time{
-        font-size: 10px;
-    }
 }
 
 @media (min-width: 768px) and (max-width:992px){
@@ -94,4 +91,5 @@ input[type=submit] { align-self: start; min-width: 10em; }
         width: 500px;
         
     }
+    
 }
