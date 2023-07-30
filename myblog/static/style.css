@@ -73,6 +73,9 @@ input[type=submit] { align-self: start; min-width: 10em; }
     .card-text{
         font-size: 15px;
     }
+    .reply-body{
+        font-size: 13px;
+    }
 }
 
 @media (min-width: 768px) and (max-width:992px){
