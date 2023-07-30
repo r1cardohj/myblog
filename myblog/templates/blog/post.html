@@ -71,7 +71,7 @@
                         <span class="badge badge-light">Reply</span>
                     {% endif %}
                 <small class="float-right text-muted" style="font-size: 14px;">{{ moment(comment.timestamp).fromNow() }}</small>
-                </h5>
+                </h4>
                 {% if comment.replied %}
                     <p class="alert alert-dark reply-body">{{ comment.replied.author}}:
                         <br>{{ comment.replied.body }}

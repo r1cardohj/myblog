@@ -66,6 +66,13 @@ input[type=submit] { align-self: start; min-width: 10em; }
     .moblie_nav_item{
         font-size: 14px;
     }
+    .card-title{
+        font-size: 14px;
+        
+    }
+    .card-text{
+        font-size: 15px;
+    }
 }
 
 @media (min-width: 768px) and (max-width:992px){
