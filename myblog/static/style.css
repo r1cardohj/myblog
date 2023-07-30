@@ -52,3 +52,33 @@ small{
 input.danger { color: #cc2f2e; }
 input[type=submit] { align-self: start; min-width: 10em; }
 .center {text-align: center;}
+
+@media (min-width: 0px) and (max-width:768px) {
+    .moblie_miss{
+        visibility:hidden
+    }
+    .moblie_me{
+        width: 300px;
+    }
+    .moblie_title{
+        font-size: 25px;
+    }
+    .moblie_nav_item{
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) and (max-width:992px){
+    .moblie_me{
+        width: 450px;
+        
+    }
+}
+
+/* 大屏幕（大桌面显示器，大于等于 1200px） */
+@media (min-width: 992px) {
+    .moblie_me{
+        width: 500px;
+        
+    }
+}
