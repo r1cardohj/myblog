@@ -217,13 +217,13 @@ def delete_project(project_id):
 def settings():
     form = SettingsForm()
     admin = Admin.query.first()
-    form.name.data = admin.name
-    form.about.data = admin.about
     if form.validate_on_submit():
         admin.name = form.name.data
         admin.about = form.about.data
         db.session.commit()
         flash('change.')
         return redirect(url_for('blog.about'))
+    form.name.data = admin.name
+    form.about.data = admin.about
     return render_template('admin/settings.html',form=form)
         
