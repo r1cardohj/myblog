@@ -76,6 +76,9 @@ input[type=submit] { align-self: start; min-width: 10em; }
     .reply-body{
         font-size: 13px;
     }
+    .category_moblie{
+        font-size:16px;
+    }
 }
 
 @media (min-width: 768px) and (max-width:992px){

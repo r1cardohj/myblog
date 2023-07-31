@@ -6,9 +6,9 @@
 {% for category in  categories %} 
     <div class="card">
       <div class="card-header">
-        <i class="fa fa-hand-o-right" style="font-size:22px"></i>
+        <i class="fa fa-hand-o-right category_moblie" style="font-size:22px"></i>
         <span class="category-title">
-            <a class="card-link " data-toggle="collapse" href="#{{category.name}}">
+            <a class="card-link category_moblie" data-toggle="collapse" href="#{{category.name}}">
                 &nbsp;&nbsp;{{ category.name }}
             </a>
             {% if current_user.is_authenticated %}
