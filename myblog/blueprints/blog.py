@@ -1,7 +1,7 @@
 from flask import Blueprint,render_template,request,current_app,flash,redirect,url_for
 from markupsafe import Markup
-from myblog.models import Post,Comment,Category
-from myblog.forms import CommentForm,AdminCommentForm
+from myblog.models import Post,Comment,Category,Subscriber
+from myblog.forms import CommentForm,AdminCommentForm,SubscribeForm
 from flask_login import current_user
 from myblog.emalis import send_comment_mail_to_admin
 from myblog.extensions import db
@@ -86,3 +86,16 @@ def about():
 @blog_bp.route('/coffee')
 def coffee():
     return render_template('blog/coffee.html')
+
+@blog_bp.route('/subscribe',methods=['GET','POST'])
+def subscribe():
+    form = SubscribeForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        sub = Subscriber(name=name,email=email)
+        db.session.add(sub)
+        db.session.commit()
+        flash('订阅成功')
+        redirect(url_for('blog.index'))
+    return render_template('blog/subscribe.html',form=form)

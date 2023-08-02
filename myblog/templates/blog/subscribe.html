@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}
+    订阅我
+{% endblock title %}
+
+{% block content %}
+<div class="page-header col-sm-12">
+    <h1>Subscribe</h1>
+    {{ render_form(form) }}
+  </div>
+{% endblock content %}

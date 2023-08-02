@@ -82,4 +82,9 @@ class Project(db.Model):
     url = db.Column(db.Text)
     begin_time = db.Column(db.DateTime,default=datetime.utcnow)
     deadline = db.Column(db.DateTime)
-    
+
+
+class Subscriber(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(254),unique = True)

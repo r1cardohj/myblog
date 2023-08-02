@@ -22,3 +22,8 @@ def send_comment_mail_to_admin(post):
     post_url = url_for('blog.show_post',post_id=post.id,_external=True) + '#comments'
     send_mail(subject='New Comment',to=current_app.config['MAIL_USERNAME'],
             template='mail/new_comment',post=post,post_url=post_url)
+
+def send_new_post_mail_to_subscribe(post,subscribe):
+    post_url = url_for('blog.show_post',post_id=post.id,_external=True)
+    send_mail(subject='New Post',to=subscribe.email,
+              template='mail/new_post',post=post,post_url=post_url)

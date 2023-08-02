@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,SubmitField,TextAreaField,PasswordField,\
-    BooleanField,SelectField,HiddenField,IntegerField,URLField,DateTimeField
+    BooleanField,SelectField,HiddenField,IntegerField,URLField,DateTimeField,EmailField
 from wtforms.validators import DataRequired,Email,Length
 from .models import Category
 
@@ -62,4 +62,10 @@ class ProjectForm(FlaskForm):
 class SettingsForm(FlaskForm):
     name = StringField('Name',validators=[DataRequired(),Length(1,50)])
     about = StringField('About',validators=[DataRequired(),Length(1,255)])
+    submit = SubmitField('Submit')
+
+
+class SubscribeForm(FlaskForm):
+    name = StringField('Name',validators=[DataRequired(),Length(1,100)])
+    email = EmailField('Email',validators=[Email(),DataRequired(),Length(1,255)])
     submit = SubmitField('Submit')

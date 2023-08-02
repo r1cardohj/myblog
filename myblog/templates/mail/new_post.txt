@@ -1,0 +1,2 @@
+Yellow Bean 
+新发布了博客文章: {{ post.title }}

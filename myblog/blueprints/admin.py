@@ -1,10 +1,11 @@
 from flask import Blueprint,request,current_app,render_template,flash,redirect,url_for
 from flask_login import login_required
-from ..models import Post,Category,Comment,Project,Admin
+from ..models import Post,Category,Comment,Project,Admin,Subscriber
 from ..extensions import db
 from .auth import redirect_back
 from ..forms import PostForm,CategoryForm,ProjectForm,SettingsForm
 from datetime import datetime
+from ..emalis import send_new_post_mail_to_subscribe
 
 
 
@@ -60,6 +61,9 @@ def new_post():
         post = Post(title=title,body=body,category=category)
         db.session.add(post)
         db.session.commit()
+        subs = Subscriber.query.all()
+        for sub in subs:
+            send_new_post_mail_to_subscribe(post,sub)
         flash('文章已创建','success')
         return redirect(url_for('blog.show_post',post_id=post.id))
     return render_template('admin/new_post.html',form = form)
@@ -226,4 +230,4 @@ def settings():
     form.name.data = admin.name
     form.about.data = admin.about
     return render_template('admin/settings.html',form=form)
-        
+
