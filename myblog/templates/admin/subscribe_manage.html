@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+    Subscribe Manage
+{% endblock title %}
+
+{% block content %}
+
+<div class="page-header col-sm-12">
+    <h1>订阅者&nbsp;<span class="badge badge-secondary">{{subscribes|length}}</span></h1>
+  <ul>
+    {% for subscribe in subscribes%}
+      <li>{{ subscribe.name }}&nbsp;&nbsp;{{ subscribe.email }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}

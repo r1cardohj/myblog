@@ -7,7 +7,7 @@ from .models import Category
 class CommentForm(FlaskForm):
     '''评论窗口'''
     author = StringField('用户名',validators=[DataRequired(),Length(1, 30)],render_kw={'placeholder':'Your Name...'})
-    email = StringField('电子邮箱',validators=[DataRequired(),Length(1,254)],render_kw={'placeholder':'Your Email...'})
+    email = EmailField('电子邮箱',validators=[DataRequired(),Email(),Length(1,254)],render_kw={'placeholder':'Your Email...'})
     body = TextAreaField('评论',validators=[DataRequired()],render_kw={'placeholder':'write something...'})
     sumbit = SubmitField('提交')
 

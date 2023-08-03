@@ -231,3 +231,10 @@ def settings():
     form.about.data = admin.about
     return render_template('admin/settings.html',form=form)
 
+
+@admin_bp.get('/subscribe/manage')
+@login_required
+def subscribe_manage():
+    subscribes = Subscriber.query.all()
+    return render_template('admin/subscribe_manage.html',subscribes=subscribes)
+
