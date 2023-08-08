@@ -8,7 +8,6 @@
         <h1>Comments
             <small class="text-muted">{{ pagination.total }}</small>
         </h1>
-
         <ul class="nav nav-pills">
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Filter </a>
@@ -58,7 +57,7 @@
                         {% endif %}
                     </td>
                     <td>{{ comment.body }}</td>
-                    <td>{{ moment(comment.timestamp).format('LL') }}</td>
+                    <td>{{ (comment.timestamp+dt).strftime("%Y-%m-%d %H:%M:%S") }}</td>
                     <td>
                         {% if not comment.reviewed %}
                             <form class="inline" method="post" style="display: inline;"

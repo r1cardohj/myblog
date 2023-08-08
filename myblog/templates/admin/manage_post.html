@@ -31,7 +31,7 @@
         <td class="center">{{ loop.index + ((page - 1) * 20 ) }}</td>
         <td class="center"><a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{ post.title }}</a></td>
         <td class="center"><a href="{{ url_for('blog.show_category',category_id = post.category.id)}}"> {{ post.category.name }}</a></td>
-        <td class="center">{{ moment(post.timestamp).format('LL')}}</td>
+        <td class="center">{{ (post.timestamp+dt).strftime("%Y-%m-%d %H:%M:%S") }}</td>
         <td class="center"><a href="{{ url_for('blog.show_post',post_id=post.id)}}#comments">{{ post.comments|length }}</a></td>
         <td class="center">{{ post.body | length }}</td>
         <td class="center">

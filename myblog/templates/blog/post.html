@@ -19,7 +19,7 @@
     <hr>
     <small>
         分类:  <span class="badge badge-light"><a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span><br>
-        日期:  {{ moment(post.timestamp).format('LL') }}
+        日期:  {{ (post.timestamp + dt).strftime("%Y-%m-%d") }}
     </small>
 </div>
 <div class="row">
@@ -70,7 +70,7 @@
                     {% if comment.replied %}
                         <span class="badge badge-light">Reply</span>
                     {% endif %}
-                <small class="float-right text-muted .comment-time" >{{ moment(comment.timestamp).fromNow() }}</small>
+                <small class="float-right text-muted .comment-time" >{{ (comment.timestamp + dt).strftime("%Y-%m-%d %H:%M") }}</small>
                 </h4>
                 {% if comment.replied %}
                     <p class="alert alert-dark reply-body">{{ comment.replied.author}}:

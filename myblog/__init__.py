@@ -1,12 +1,13 @@
 import os
 import click
 from .blueprints import admin,auth,blog
-from .extensions import db,bootstrap,moment,login_manager,mail,migrate,csrf
+from .extensions import db,bootstrap,login_manager,mail,migrate,csrf
 from .models import Admin,Category,Project,Comment
 from .settings import config
 from flask import  Flask,render_template,request
 from flask_login import current_user
 from flask_wtf.csrf import CSRFError
+import datetime
 
 import logging
 from logging.handlers import SMTPHandler,RotatingFileHandler
@@ -29,7 +30,6 @@ def create_app(config_name=None):
 def register_extensions(app):
     db.init_app(app)
     bootstrap.init_app(app)
-    moment.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
     migrate.init_app(app,db)
@@ -148,12 +148,13 @@ def register_templates_context(app:Flask):
         admin = Admin.query.first() 
         categories = Category.query.order_by(Category.name).all()
         projects = Project.query.order_by(Project.begin_time).all()
+        dt = datetime.timedelta(hours=8)
         if current_user.is_authenticated:
             unread_comments = Comment.query.filter_by(reviewed=False).count()
         else:
             unread_comments = None
         return dict(admin=admin, categories=categories,
-                    projects = projects,unread_comments=unread_comments)
+                    projects = projects,unread_comments=unread_comments,dt=dt)
 
 
 def register_errors(app:Flask):
