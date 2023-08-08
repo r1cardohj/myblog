@@ -21,6 +21,7 @@ class BaseConfig(object):
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = ('Yellow Bean',os.getenv('MAIL_USERNAME'))
     MAIL_SUBJECT_PREFIX = 'MyBlog:'
+    BOOTSTRAP_SERVE_LOCAL = True
 
 
 
