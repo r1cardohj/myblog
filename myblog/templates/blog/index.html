@@ -11,16 +11,22 @@
             <hr>
         <p>Dear:</p>
         <p>你好,我是这个网站的主人</p>
-        <p>据说这个网站会闹鬼...<br>
-        <p>你害怕吗？</p>
-        <p>订阅我,遇到危险我会来救你。 &nbsp;<button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button></p>
+        <p>由衷的感谢你的到来
+        <button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button>
+        </p>
         <h1>My Post:</h1>
             <hr>
         {% if posts %}
             
-            <p>我的笔记、分享、心情...</p>
+            <p>未完待续...</p>
+            <div style="margin-top:20px">
+                {% for post in posts %}
+                <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
+                {% endfor %}
+                
+            </div>
             <!--<ul style="list-style: none;margin-top:20px">-->
-            {% for post in posts %}
+            <!--{% for post in posts %}
                 
                     <div style="margin-top: 50px;">
                         <a style="font-size: 18px;" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
@@ -30,7 +36,7 @@
                     </p>
                     </div>
                 
-            {% endfor %}
+            {% endfor %}-->
             <!--</ul>-->
         {% else %}
             <div class="tip">

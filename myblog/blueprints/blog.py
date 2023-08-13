@@ -12,7 +12,7 @@ blog_bp = Blueprint('blog',__name__)
 def index():
     page =request.args.get('page', type=int)
     per_page = current_app.config['POST_PER_PAGE']
-    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page,per_page=7)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page,per_page=10)
     #posts = Post.query.order_by(Post.timestamp.desc()).limit(10).all()
     posts = pagination.items
     return render_template('blog/index.html',posts=posts,pagination = pagination)
