@@ -21,19 +21,6 @@
                 {% endfor %}
                 
             </div>
-            <!--<ul style="list-style: none;margin-top:20px">-->
-            <!--{% for post in posts %}
-                
-                    <div style="margin-top: 50px;">
-                        <a style="font-size: 18px;" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
-                    <p style="font-size:13px;margin-top:8px;">
-                        收录于 <span class="badge badge-light"><a style="font-size: 14px;" href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span>，&nbsp;<br>
-                        写作于<span class="badge badge-light" style="font-size: 13px;">{{ (post.timestamp + dt).strftime("%Y年%m月%d日") }}</span>{{ loop.cycle('一个夜晚','一个早晨','一个中午')}}
-                    </p>
-                    </div>
-                
-            {% endfor %}-->
-            <!--</ul>-->
         {% else %}
             <div class="tip">
                 <h5>这个人很懒,还没写博客...</h5>
