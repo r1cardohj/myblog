@@ -12,11 +12,9 @@
         <p>由衷的感谢你的到来
         <button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button>
         </p>
-        <h1 class="moblie_title_index">My Post:</h1>
-            <hr>
         {% if posts %}
             
-            <p>未完待续...</p>
+            <p>最近的文章:</p>
             <div style="margin-top:20px">
                 {% for post in posts %}
                 <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
