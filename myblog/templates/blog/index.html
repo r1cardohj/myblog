@@ -5,47 +5,37 @@
 {% endblock %}
 
 {% block content %}
-
-        <div class="col-sm-8 post-area">
+        
+        <div class="col-sm-12">
+            <h1>Welcome!👻</h1>
+            <hr>
+        <p>Dear:</p>
+        <p>你好,我是这个网站的主人</p>
+        <p>据说这个网站会闹鬼...<br>
+        <p>你害怕吗？<br>......<br>可以订阅我,遇到危险我会来救你。 &nbsp;<button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button></p>
         {% if posts %}
+            <h1>My Post:</h1>
+            <hr>
+            <p>我的笔记、分享、心情...</p>
+            <ul style="list-style: none;margin-top:20px">
             {% for post in posts %}
-            <article class="post ">
-                <header>
-                    <div>
-                        <h1 class="post-title " style="text-align: center;font-weight:600"><a href="{{ url_for('.show_post', post_id=post.id ) }}">{{ post.title }}</a></h1>
-                        <div class="about" style="text-align: center;margin-top:5px">    
-                            <i class="fa fa-calendar" style="font-size:14px"></i> {{ (post.timestamp + dt).strftime("%Y-%m-%d") }} 
-                                &nbsp;&nbsp;<i class="fa fa-book" style="font-size:14px"></i> <a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a>
-                                &nbsp;&nbsp;<i class="fa fa-commenting-o" style="font-size:14px"></i> <a href="#">{{ post.comments|length}}</a>
-                        </div>
-                    </div>
-                </header>
-                <div class="post-about">
-                <p class="" style="text-indent: 35px;line-height: 1.6;letter-spacing: 1px;">
-                    {% if post.body_html %}
-                    {{ post.body_html|striptags|truncate }}
-                    {% else %}
-                    {{ post.body|striptags|truncate }}
-                    {% endif %}
-                    <small><a href="{{ url_for('.show_post', post_id=post.id ) }}">更多</a></small>
-                </p>
-                </div> 
-            </article>
+                
+                    <li style="margin-top: 50px;"><a style="font-size: 22px;font-family:fantasy" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
+                    <p style="font-size:13px;margin-top:8px;">
+                        收录于 <span class="badge badge-light"><a style="font-size: 16px;" href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span>，&nbsp;<br>
+                        写作于<span class="badge badge-light" style="font-size: 15px;">{{ (post.timestamp + dt).strftime("%Y年%m月%d日") }}</span>，{{ loop.cycle('一个心情愉悦的夜晚🌛','一个稀疏平常的早晨🌞','一个没吃饭的中午😥','一个苦逼加班的夜晚🏃‍♂️')}}
+                    </p>
+                    </li>
+                
             {% endfor %}
+            </ul>
         {% else %}
             <div class="tip">
                 <h5>这个人很懒,还没写博客...</h5>
             </div>
         {% endif %}
         </div>
-        <div class="col-sm-4 moblie_miss">
-            <div class="card">
-                {% include 'blog/_mycard.html' %}
-            </div>
-            <div class="sidebar">
-                {% include 'blog/_sidebar.html' %}
-            </div>
-        </div>
+        
     
     {{ render_pagination(pagination) }}
     

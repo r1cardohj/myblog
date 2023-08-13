@@ -12,7 +12,7 @@ blog_bp = Blueprint('blog',__name__)
 def index():
     page =request.args.get('page', type=int)
     per_page = current_app.config['POST_PER_PAGE']
-    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page,per_page=5)
+    pagination = Post.query.order_by(Post.timestamp.desc()).paginate(page=page,per_page=7)
     #posts = Post.query.order_by(Post.timestamp.desc()).limit(10).all()
     posts = pagination.items
     return render_template('blog/index.html',posts=posts,pagination = pagination)
@@ -99,3 +99,9 @@ def subscribe():
         flash('订阅成功')
         redirect(url_for('blog.index'))
     return render_template('blog/subscribe.html',form=form)
+
+@blog_bp.route('/logmyself',methods=['GET'])
+def logmyself():
+    posts = Post.query.order_by(Post.timestamp.desc())
+    years = Post.query.order_by(Post.timestamp.desc())
+    return render_template('blog/log.html',posts = posts)

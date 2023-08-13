@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Archive
+{% endblock title %}
+
+{% block content %}
+<div class='col-sm-12'>
+
+<h1>Archive🕐</h1>
+<hr>
+<div>
+    未完待续...
+<ul style="list-style: none;margin-top:20px">
+    {% for post in posts %}
+    <li style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></li>
+    {% endfor %}
+    
+</ul>
+</div> 
+</div>
+
+
+
+{% endblock content %}
