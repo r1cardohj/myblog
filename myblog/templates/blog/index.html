@@ -23,7 +23,7 @@
             {% for post in posts %}
                 
                     <div style="margin-top: 50px;">
-                        <a style="font-size: 22px;" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
+                        <a style="font-size: 18px;" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
                     <p style="font-size:13px;margin-top:8px;">
                         收录于 <span class="badge badge-light"><a style="font-size: 14px;" href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span>，&nbsp;<br>
                         写作于<span class="badge badge-light" style="font-size: 13px;">{{ (post.timestamp + dt).strftime("%Y年%m月%d日") }}</span>，{{ loop.cycle('一个心情愉悦的夜晚🌛','一个稀疏平常的早晨🌞','一个没吃饭的中午😥','一个苦逼加班的夜晚🏃‍♂️')}}
