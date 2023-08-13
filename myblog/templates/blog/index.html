@@ -12,23 +12,26 @@
         <p>Dear:</p>
         <p>你好,我是这个网站的主人</p>
         <p>据说这个网站会闹鬼...<br>
-        <p>你害怕吗？<br>......<br>可以订阅我,遇到危险我会来救你。 &nbsp;<button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button></p>
-        {% if posts %}
-            <h1>My Post:</h1>
+        <p>你害怕吗？</p>
+        <p>可以订阅我,遇到危险我会来救你。 &nbsp;<button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button></p>
+        <h1>My Post:</h1>
             <hr>
+        {% if posts %}
+            
             <p>我的笔记、分享、心情...</p>
-            <ul style="list-style: none;margin-top:20px">
+            <!--<ul style="list-style: none;margin-top:20px">-->
             {% for post in posts %}
                 
-                    <li style="margin-top: 50px;"><a style="font-size: 22px;font-family:fantasy" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
+                    <div style="margin-top: 50px;">
+                        <a style="font-size: 22px;" href="{{ url_for('.show_post', post_id=post.id ) }}">📃&nbsp;{{ post.title }}</a>
                     <p style="font-size:13px;margin-top:8px;">
-                        收录于 <span class="badge badge-light"><a style="font-size: 16px;" href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span>，&nbsp;<br>
-                        写作于<span class="badge badge-light" style="font-size: 15px;">{{ (post.timestamp + dt).strftime("%Y年%m月%d日") }}</span>，{{ loop.cycle('一个心情愉悦的夜晚🌛','一个稀疏平常的早晨🌞','一个没吃饭的中午😥','一个苦逼加班的夜晚🏃‍♂️')}}
+                        收录于 <span class="badge badge-light"><a style="font-size: 14px;" href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span>，&nbsp;<br>
+                        写作于<span class="badge badge-light" style="font-size: 13px;">{{ (post.timestamp + dt).strftime("%Y年%m月%d日") }}</span>，{{ loop.cycle('一个心情愉悦的夜晚🌛','一个稀疏平常的早晨🌞','一个没吃饭的中午😥','一个苦逼加班的夜晚🏃‍♂️')}}
                     </p>
-                    </li>
+                    </div>
                 
             {% endfor %}
-            </ul>
+            <!--</ul>-->
         {% else %}
             <div class="tip">
                 <h5>这个人很懒,还没写博客...</h5>
