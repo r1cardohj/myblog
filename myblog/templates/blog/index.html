@@ -1,20 +1,18 @@
 {% extends 'base.html' %}
 {% from 'bootstrap/pagination.html' import render_pagination %}
 
-{% block header %}
-{% endblock %}
 
 {% block content %}
         
         <div class="col-sm-12">
-            <h1>Welcome!👻</h1>
+            <h1 class="moblie_title_index">Welcome!👻</h1>
             <hr>
         <p>Dear:</p>
         <p>你好,我是这个网站的主人</p>
         <p>由衷的感谢你的到来
         <button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button>
         </p>
-        <h1>My Post:</h1>
+        <h1 class="moblie_title_index">My Post:</h1>
             <hr>
         {% if posts %}
             

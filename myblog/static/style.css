@@ -63,6 +63,9 @@ input[type=submit] { align-self: start; min-width: 10em; }
     .moblie_title{
         font-size: 25px;
     }
+    .moblie_title_index{
+        font-size: 30px;
+    }
     .moblie_nav_item{
         font-size: 14px;
     }
