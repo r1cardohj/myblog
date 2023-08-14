@@ -7,7 +7,7 @@
         <div class="col-sm-12">
             <h1 class="">Welcome!👻</h1>
             <hr>
-        <p><b>Dear:</b></p>
+        <p><b>YellowBean:</b></p>
         <p>你好,我是这个网站的主人</p>
         <p>由衷的感谢你的到来
         <button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button>
@@ -19,16 +19,16 @@
                 {% for post in posts %}
                 <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
                 {% endfor %}
-                
             </div>
         {% else %}
             <div class="tip">
-                <h5>这个人很懒,还没写博客...</h5>
+                <p>这个人很懒,还没写博客...</p>
             </div>
         {% endif %}
+        
         </div>
         
     
-    {{ render_pagination(pagination) }}
+    
     
 {% endblock %}
