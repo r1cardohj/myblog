@@ -15,6 +15,7 @@
         {% if posts %}
             
             <p><b>最近的文章:</b></p>
+            <p style="font-size:16px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">&nbsp;<i>"happy wife, happy life."</i></p>
             <div style="margin-top:20px">
                 {% for post in posts %}
                 <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
@@ -25,8 +26,8 @@
                 <p>这个人很懒,还没写博客...</p>
             </div>
         {% endif %}
-        <p><b>Slogan:</b></p>
-        <p><i>"happy wife, happy life."</i></p>
+        
+        
         
         </div>
         
