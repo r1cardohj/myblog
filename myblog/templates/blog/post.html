@@ -4,8 +4,9 @@
 
 {% block styles %}
 {{ super() }}
-<link href="{{ url_for('static', filename='editormd/css/editormd.preview.min.css') }}" rel="stylesheet" />  
-<link href="{{ url_for('static', filename='editormd/css/editormd.css') }}" rel="stylesheet" /> 
+<!--<link href="{{ url_for('static', filename='editormd/css/editormd.preview.min.css') }}" rel="stylesheet" />  
+<link href="{{ url_for('static', filename='editormd/css/editormd.css') }}" rel="stylesheet" />-->
+<link rel="stylesheet" href="{{ url_for('static',filename='github/github-markdown-light.css')}}">
 {% endblock styles %}
 {% block title %}
 {{ post.title }}
@@ -23,7 +24,7 @@
     </small>
 </div>
 <div class="row">
-    <div class="" id="fancy-content">
+    <article  class="markdown-body">
     <p style="line-height: 1.8;letter-spacing: 2px;">
         {% if post.body_html %}
             {{ post.body_html | safe}}
@@ -32,7 +33,7 @@
         {% endif %}
     </p>
     <p>如需转载,请标明出处。</p>
-    </div>
+    </article>
 </div>
 </div>
 {% if post.can_comment %}
@@ -107,10 +108,4 @@
 {% endblock content %}
 {% block scripts %}
    {{ super() }}
-   <script type="text/javascript" src="{{ url_for('static', filename='editormd/lib/marked.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='editormd/lib/prettify.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='editormd/editormd.min.js') }}"></script>
-    <script type="text/javascript">
-        editormd.markdownToHTML("fancy-content");
-    </script>
 {% endblock scripts %}
