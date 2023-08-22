@@ -7,6 +7,7 @@
 <!--<link href="{{ url_for('static', filename='editormd/css/editormd.preview.min.css') }}" rel="stylesheet" />  
 <link href="{{ url_for('static', filename='editormd/css/editormd.css') }}" rel="stylesheet" />-->
 <link rel="stylesheet" href="{{ url_for('static',filename='github/github-markdown-light.css')}}">
+<link href="https://cdn.staticfile.org/highlight.js/11.8.0/styles/base16/github.min.css" rel="stylesheet">
 {% endblock styles %}
 {% block title %}
 {{ post.title }}
@@ -108,4 +109,8 @@
 {% endblock content %}
 {% block scripts %}
    {{ super() }}
+   <script src="https://cdn.staticfile.org/highlight.js/11.8.0/highlight.min.js"></script>
+   <script>
+    hljs.highlightAll();
+  </script>
 {% endblock scripts %}
