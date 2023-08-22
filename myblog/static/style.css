@@ -85,7 +85,7 @@ input[type=submit] { align-self: start; min-width: 10em; }
     .category_title_moblie{
         font-size: 26px;
     }
-    pre {max-height: 250px;overflow: auto}
+    pre {max-height: 250px;overflow-x: hidden;overflow-y: scroll;}
 }
 
 @media (min-width: 768px) and (max-width:992px){
