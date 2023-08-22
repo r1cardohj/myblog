@@ -3209,7 +3209,8 @@
 }
 
 .markdown-body pre {
-  overflow: auto;
+  overflow-x:hidden;
+  overflow-y: auto;
 }
 
 .markdown-body code,
@@ -3633,7 +3634,8 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-size: 85%;
   line-height: 1.45;
   background-color: #f7f7f7;
