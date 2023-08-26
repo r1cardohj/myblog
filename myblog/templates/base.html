@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="keywords" content="R1cardohj,yellowbean,博客,Python,个人博客,flask,技术分享">
 {% block styles %}
-<!--{{ bootstrap.load_css() }}-->
 <link rel="Shortcut Icon" href="{{ url_for('static', filename='img/yellowbean.jpg')}}" type="image/x-icon" />
 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -27,19 +26,9 @@
       <a href="{{ url_for('blog.about')}}">关于我</a>
     </li>
     {% if current_user.is_authenticated %}
-      <li class="nav-item dropdown moblie_nav_item">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">管理</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="{{ url_for('admin.manage_post')}}">我的文章</a>
-          <a class="dropdown-item" href="{{ url_for('admin.manage_comment') }}">读评论
-            {% if unread_comments %}
-              <span class="badge badge-success">{{ unread_comments }}</span>
-            {% endif %}
-          </a>
-          <a class="dropdown-item" href="{{ url_for('admin.new_category') }}">新分类</a>
-          <a class="dropdown-item" href="{{ url_for('admin.manage_project')}}">项目管理</a>
-        </div>
-      </li>  
+      <li class="moblie_nav_item">
+        <a href="{{ url_for('admin.manage')}}">管理</a>
+      </li>
     {% endif %}
   </ul>
 </nav>
@@ -80,8 +69,4 @@
         </footer>
     {% endblock footer %}
 {% block scripts %}
-<!--{{ bootstrap.load_js() }}-->
-<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
-<script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 {% endblock %}

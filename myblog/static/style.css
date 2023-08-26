@@ -117,3 +117,18 @@ input[type=submit] { align-self: start; min-width: 10em; }
         padding: 15px;
     }
 }
+
+ul.tagcloud {
+    font-size: 16px;
+    margin: 36px 0;
+    padding: 0;
+    list-style: none;
+    line-height: 1.45;
+    text-align: justify;
+}
+
+ul.tagcloud li {
+    margin: 0;
+    padding: 0 10px;
+    display: inline;
+}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Admin
+{% endblock title %}
+
+{% block content %}
+<div class="page-header col-sm-12">
+    <h1>Admin</h1>
+    <hr>
+    <ul style="font-size:18px;">
+        <li style="margin-top: 20px;"><a  href="{{ url_for('admin.manage_post')}}">我的文章</a></li>
+        <li style="margin-top: 20px;"><a  href="{{ url_for('admin.manage_comment') }}">读评论 
+            {% if unread_comments %}
+              <span class="badge badge-success">{{ unread_comments }}</span>
+            {% endif %}
+        </li>
+        <li style="margin-top: 20px;"><a href="{{ url_for('admin.new_category') }}">新分类</a></li>
+        <li style="margin-top: 20px;"><a href="{{ url_for('admin.manage_project')}}">项目管理</a></li>
+    </ul>
+</div>
+{% endblock content %}

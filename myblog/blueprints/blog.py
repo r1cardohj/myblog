@@ -102,5 +102,4 @@ def subscribe():
 @blog_bp.route('/logmyself',methods=['GET'])
 def logmyself():
     posts = Post.query.order_by(Post.timestamp.desc())
-    years = Post.query.order_by(Post.timestamp.desc())
     return render_template('blog/log.html',posts = posts)

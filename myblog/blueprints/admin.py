@@ -238,3 +238,8 @@ def subscribe_manage():
     subscribes = Subscriber.query.all()
     return render_template('admin/subscribe_manage.html',subscribes=subscribes)
 
+
+@admin_bp.get('/')
+@login_required
+def manage():
+    return render_template('admin/manage.html')

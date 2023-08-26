@@ -8,10 +8,21 @@
             <h1 class="">Welcome!👻</h1>
             <hr>
         <p><b>R1cardohj:</b></p>
+        {% if current_user.is_authenticated %}
+            <p>你最好<a href="{{url_for('admin.new_post')}}">写点什么！！！</a></p>
+            <p>看看有谁最近<a href="{{ url_for('admin.subscribe_manage')}}">订阅</a>了你...</p>     
+        {% else %}
         <p>你好,我是这个网站的主人</p>
         <p>由衷的感谢你的到来
+        
+        {% if current_user.is_authenticated %}
+        <button><a href="{{ url_for('admin.subscribe_manage')}}">订阅</a></button>
+        {% else %}
         <button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button>
+        {% endif %}
         </p>
+        {% endif %}
+        
         {% if posts %}
             
             <p><b>最近的文章:</b></p>

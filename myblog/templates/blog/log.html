@@ -13,8 +13,12 @@
     未完待续...
 <div style="margin-top:20px">
     {% for post in posts %}
-    <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
+    {% if loop.changed(post.timestamp.strftime("%Y")) %}
+        <h3 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-bottom:20px;margin-top:20px;">{{ post.timestamp.strftime("%Y") }}</h3>
+    {% endif %} 
+    <p style="margin-top:8px;margin-left:20px"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%m/%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
     {% endfor %}
+        
     
 </div>
 </div> 
