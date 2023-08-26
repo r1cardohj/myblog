@@ -7,7 +7,7 @@
   <hr>
   <ul class="tagcloud">
 {% for category in  categories %}
-    <li style="font-size: {{category.posts | length * 20}}%; "><a href="{{url_for('blog.show_category',category_id=category.id)}}">{{category.name}}</a></li>
+    <li style="font-size: {{category.posts | length * 10 + 100}}%; "><a href="{{url_for('blog.show_category',category_id=category.id)}}">{{category.name}}</a></li>
 {% endfor %}
 </ul>
 </div>

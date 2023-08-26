@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="col-sm-12">
-<div class="jumbotron jumbotron-fluid mt-4">
-    <div class="container">
-    <h1 class="category_title_moblie">{{ category.name }}</h1> 
-    </div>
-</div>
+<!--<div class="jumbotron jumbotron-fluid mt-4">
+    <div class="container">-->
+    <h1 class="category_title_moblie">{{ category.name }}</h1>
+    <hr>
+    <!--</div>
+</div>-->
 <div class="list-group mt-4">
+    <ul>
     {% for post in posts %}
-    <a href="{{ url_for('blog.show_post',post_id=post.id) }}" class="list-group-item list-group-item-action">
-        {{ post.title }} <i class="fa fa fa-angle-right float-right" style="font-size:24px"></i></a>
+    <li style="margin-top: 8px;"><a href="{{ url_for('blog.show_post',post_id=post.id) }}">
+        {{ post.title }} </a>
+    </li>
     {% endfor %}
+    </ul>
 </div>
 </div>
 {% endblock content %}

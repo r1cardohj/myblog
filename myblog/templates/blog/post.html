@@ -31,7 +31,7 @@
             {{post.body|safe}}
         {% endif %}
     </p>
-    <p style="text-align:right">文章被收录于 <a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a> 分类</p>
+    <p style="text-align:right">文章被收录于 <a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a> 分类。</p>
     <p style="text-align:right">如需转载,请标明出处。</p>
     </article>
 </div>
