@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="col-sm-12">
-<!--<div class="jumbotron jumbotron-fluid mt-4">
-    <div class="container">-->
-    <h1 class="category_title_moblie">{{ category.name }}</h1>
-    <hr>
-    <!--</div>
-</div>-->
+    <h1 class="">--{{ category.name }}--</h1>
 <div class="list-group mt-4">
     <ul>
     {% for post in posts %}
-    <li style="margin-top: 8px;"><a href="{{ url_for('blog.show_post',post_id=post.id) }}">
-        {{ post.title }} </a>
+    <li style="margin-top: 6px;"><a  href="{{ url_for('blog.show_post',post_id=post.id) }}">
+        {{ post.title }} </a> <span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">,&nbsp;创作于{{(post.timestamp + dt).strftime("%Y年%m月%d日")}}</span>
     </li>
     {% endfor %}
     </ul>
