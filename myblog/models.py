@@ -40,6 +40,7 @@ class Post(db.Model):
     body = db.Column(db.Text)
     body_html = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    upd_timestamp = db.Column(db.DateTime)
     category_id = db.Column(db.Integer,db.ForeignKey('category.id'))
     category = db.relationship('Category',back_populates='posts')
     comments = db.relationship('Comment',back_populates = 'post', cascade='all,delete-orphan')

@@ -41,6 +41,7 @@ def edit_post(post_id):
         post.title = form.title.data
         post.body = form.body.data
         post.category = Category.query.get(form.category.data)
+        post.upd_timestamp = datetime.utcnow()
         db.session.commit()
         flash(f'文章 《{post.title} 已修改.》','success')
         return redirect(url_for('blog.show_post',post_id=post.id))

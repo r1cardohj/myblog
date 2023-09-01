@@ -24,13 +24,15 @@
 </div>
 <div class="row">
     <article  class="markdown-body col-sm-12">
-    <p style="line-height: 1.8;letter-spacing: 2px;">
+        {% if post.upd_timestamp %}
+            <p>🖊 文章更新于 {{(post.upd_timestamp + dt).strftime("%Y 年 %m 月 %d 日")}}</p>
+        {% endif %}
+
         {% if post.body_html %}
             {{ post.body_html | safe}}
         {% else %}
             {{post.body|safe}}
         {% endif %}
-    </p>
     <p style="text-align:right">文章被收录于 <a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a> 分类</p>
 
     </article>
