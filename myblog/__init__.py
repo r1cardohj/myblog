@@ -2,9 +2,9 @@ import os
 import click
 from .blueprints import admin,auth,blog
 from .extensions import db,bootstrap,login_manager,mail,migrate,csrf
-from .models import Admin,Category,Project,Comment
+from .models import Admin,Category,Project,Comment,Post
 from .settings import config
-from flask import  Flask,render_template,request
+from flask import  Flask,render_template,request,url_for
 from flask_login import current_user
 from flask_wtf.csrf import CSRFError
 import datetime
@@ -149,12 +149,13 @@ def register_templates_context(app:Flask):
         categories = Category.query.order_by(Category.name).all()
         projects = Project.query.order_by(Project.begin_time).all()
         dt = datetime.timedelta(hours=8)
+        now = Post.query.filter_by(title = 'Now').first()
         if current_user.is_authenticated:
             unread_comments = Comment.query.filter_by(reviewed=False).count()
         else:
             unread_comments = None
         return dict(admin=admin, categories=categories,
-                    projects = projects,unread_comments=unread_comments,dt=dt)
+                    projects = projects,unread_comments=unread_comments,dt=dt,now=now)
 
 
 def register_errors(app:Flask):

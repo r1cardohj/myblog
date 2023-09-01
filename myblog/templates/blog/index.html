@@ -12,7 +12,7 @@
             <p>你最好<a href="{{url_for('admin.new_post')}}">写点什么！！！</a></p>
             <p>看看有谁最近<a href="{{ url_for('admin.subscribe_manage')}}">订阅</a>了你...</p>     
         {% else %}
-        <p>你好,我是这个网站的主人</p>
+        <p>你好,我是这个网站的主人 </p>
         <p>由衷的感谢你的到来
         
         {% if current_user.is_authenticated %}
@@ -29,7 +29,9 @@
             <p style="font-size:16px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">&nbsp;<i>"happy wife, happy life."</i></p>
             <div style="margin-top:20px">
                 {% for post in posts %}
+                {% if post.category.name != 'default' %}
                 <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
+                {% endif %}
                 {% endfor %}
             </div>
         {% else %}
@@ -37,6 +39,7 @@
                 <p>这个人很懒,还没写博客...</p>
             </div>
         {% endif %}
+        <p style="font-size:16px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">🚶‍♂️<i><a href="{{ url_for('blog.show_post',post_id=now.id)}}">What Now?</a></i></p>
         
         
         
