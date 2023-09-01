@@ -24,7 +24,7 @@
 </div>
 <div class="row">
     <article  class="markdown-body col-sm-12">
-        {% if post.upd_timestamp %}
+        {% if post.upd_timestamp and post.title == 'Now'%}
             <p>🖊 文章更新于 {{(post.upd_timestamp + dt).strftime("%Y 年 %m 月 %d 日")}}</p>
         {% endif %}
 
