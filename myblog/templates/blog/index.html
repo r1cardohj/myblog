@@ -22,9 +22,9 @@
         {% endif %}
         </p>
         {% endif %}
+        <p>查看<a href="{{ url_for('blog.show_post',post_id=now.id)}}">我的近况</a></p>
         
         {% if posts %}
-            
             <p><b>最近的文章:</b></p>
             <p style="font-size:16px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">&nbsp;<i>"happy wife, happy life."</i></p>
             <div style="margin-top:20px">
@@ -39,10 +39,7 @@
                 <p>这个人很懒,还没写博客...</p>
             </div>
         {% endif %}
-        <p style="font-size:16px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">🚶‍♂️<i><a href="{{ url_for('blog.show_post',post_id=now.id)}}">What Now?</a></i></p>
-        
-        
-        
+          
         </div>
         
     
