@@ -14,17 +14,20 @@
     </li>
     <ul>
 <br>
+<b>About this site</b>
+<ul>
+    <li style="margin-top:20px;">这个网站是我在练习<a href="https://flask.palletsprojects.com/en/2.3.x/">flask</a>时做的一个项目</li>
+    <li>UI框架是<a href="https://terminalcss.xyz/">Terminal.css</a>,相当戳中我的审美点。</li>
+</ul>
+<br>
 <b>My project</b>
+<ol>
 {% for project in projects %}
-<div class="row mt-3" >
-        <h4 style="margin-top:20px;">{{ project.title }}</h5>
-        <li>{{ project.detail }}</li>
-        <p class="badge badge-primary"></p>
-        <div class="progress-bar progress-bar-show-percent">
-        <div class="progress-bar-filled" style="width:{{ project.progress }}%;" data-filled="Loading {{  project.progress }}%"></div>
-        </div>
-</div>
+    
+        <li style="margin-top:20px;">{{ project.title }}</li>
+
 {% endfor %}
+</ol>
 {% endblock content %}
 
 {% block scripts %}
