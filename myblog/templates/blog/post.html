@@ -4,24 +4,13 @@
 
 {% block styles %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static',filename='github/github-markdown-light.css')}}">
 <link href="https://cdn.staticfile.org/highlight.js/11.8.0/styles/base16/github.min.css" rel="stylesheet">
 {% endblock styles %}
 {% block title %}
 {{ post.title }}
 {% endblock title %}
 {% block content %}
-<div class="col-sm-12">
-<div  class= "mx-auto">
-    
-<div class="page-header text-muted">
-    <h2 class="post-title">{{ post.title }}</h2>
-    <hr>
-    <small>
-        分类:  <span class="badge badge-light"><a href="{{ url_for('blog.show_category',category_id=post.category.id) }}">{{ post.category.name }}</a></span><br>
-        日期:  {{ (post.timestamp + dt).strftime("%Y-%m-%d") }}
-    </small>
-</div>
+<h1 class="post-title">{{ post.title }}</h1>
 <div class="row">
     <article  class="markdown-body col-sm-12">
         {% if post.upd_timestamp and post.title == 'Now'%}
@@ -46,20 +35,21 @@
         <a class="float-right" href="{{ url_for('.show_post', post_id=post.id) }}">Cancel</a>
     </div>
     {% endif %}
+    <fieldset>
+        <legend>comment form</legend>
     {{ render_form(form, action=request.full_path) }}
+    </fieldset>
 </div>
 {% else%}
     <div class="tip"><h5>Comment disabled.</h5></div>
 {% endif %}
 
-<div class="comments" id="comments">
-    <h3 class="comment-top">&nbsp;评论&nbsp;<span class="badge badge-secondary">{{ pagination.total }}</span> 
-        <small class="float-right">
-            <a href="{{ url_for('blog.show_post',post_id=post.id, page=pagination.pages or 1)}}#comments">最新评论</a>
-        </small>
-    </h3>
+<div class="comments" id="comments" >
+    <h2 style='margin-top:60px;'>评论{{ pagination.total }}</span>
+    </h2>
     {% if comments %}
         {% for comment in comments %}
+        
         <div class="card comment-card">
             <div class="card-body">
                 <h4 class="card-title">
@@ -69,7 +59,7 @@
                         {{ comment.author}}
                     {% endif %}
                     {% if comment.from_admin %}
-                        <span class="badge badge-success">Admin</span>
+                        <sup>Admin</sup>
                     {% endif %}
                     {% if comment.replied %}
                         <span class="badge badge-light">Reply</span>
@@ -93,11 +83,12 @@
                     </button>
                     </form>
                 {% endif %}
-                    <a href="{{ url_for('blog.reply_comment',comment_id=comment.id)}}" class="btn btn-primary btn-sm card-link">回复</a>
+                    <a href="{{ url_for('blog.reply_comment',comment_id=comment.id)}}">回复</a>
                 </div>
                 
             </div>
         </div>
+        <hr>
         {% endfor %}
     {% else %}
         <div class="tip"><h5>暂时没有评论.</h5></div>
@@ -106,7 +97,6 @@
 {% if comments %}
     {{ render_pagination(pagination,fragment='#comments') }}
 {% endif %}
-</div>
 {% endblock content %}
 {% block scripts %}
    {{ super() }}

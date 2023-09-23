@@ -5,21 +5,17 @@
 {% endblock title %}
 
 {% block content %}
-<div class='col-sm-12'>
 
-<h1 class="">Archive🕐</h1>
-<hr>
+<h1 id = "print"></h1>
 <div>
     未完待续...
 <div style="margin-top:20px">
     {% for post in posts %}
     {% if loop.changed(post.timestamp.strftime("%Y")) %}
-        <h3 style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;margin-bottom:20px;margin-top:20px;">{{ post.timestamp.strftime("%Y") }}</h3>
+        <h3 >{{ post.timestamp.strftime("%Y") }}</h3>
     {% endif %} 
-    <p style="margin-bottom:8px;margin-left:20px"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%m/%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
+    <p style="margin-bottom:8px;margin-left:20px"><span>{{(post.timestamp + dt).strftime("%m/%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
     {% endfor %}
-        
-    
 </div>
 </div> 
 </div>
@@ -27,3 +23,18 @@
 
 
 {% endblock content %}
+{% block scripts %}
+<script>
+
+    let text = "Archive";  
+    let index = 0;  
+    let div = document.getElementById('print');   
+    
+    setInterval(function() {  
+      if(index < text.length) {  
+          div.innerHTML += text.charAt(index);  
+          index++;  
+      }  
+    }, 100); 
+  </script>
+{% endblock scripts %}

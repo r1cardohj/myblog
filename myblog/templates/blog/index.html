@@ -4,36 +4,59 @@
 
 {% block content %}
         
-        <div class="col-sm-12">
-            <h1 class="">Welcome!👻</h1>
-            <hr>
-        <p><b>R1cardohj:</b></p>
-        {% if current_user.is_authenticated %}
-            <p>你最好<a href="{{url_for('admin.new_post')}}">写点什么！！！</a></p>
-            <p>看看有谁最近<a href="{{ url_for('admin.subscribe_manage')}}">订阅</a>了你...</p>     
-        {% else %}
-        <p>你好,我是这个网站的主人 </p>
-        <p>由衷的感谢你的到来
+        <h1 id='print'></h1>
+        <div class="terminal-card">
+            <header>tips</header>
+        <div>
+            <b>About this site</b>
+            {% if current_user.is_authenticated %}
+            <ul>
+            <li>你最好<a href="{{url_for('admin.new_post')}}">写点什么！！！</a></li>
+            <li>看看有谁最近<a href="{{ url_for('admin.subscribe_manage')}}">订阅</a>了你...</li>
+            </ul>     
+            {% else %}
+            <ul>
+              <li>这是一个用于记录<b>知识和想法</b>的站点。</li>
+              <li>该网站使用 <b>flask</b> 制作</li>
+              <li><b><a href="{{ url_for('blog.subscribe')}}">订阅我</a></b></li>
+            </ul>
+            <b>About me</b>
+            <ul>
+              <li>我是<b>r1cardohj</b></li>
+              <li>查看<b><a href="{{ url_for('blog.show_post',post_id=now.id)}}">我的近况</a></b></li>
+            </ul>
+            {% endif %}
+        </div>
+        </div>
         
-        {% if current_user.is_authenticated %}
-        <button><a href="{{ url_for('admin.subscribe_manage')}}">订阅</a></button>
-        {% else %}
-        <button><a href="{{ url_for('blog.subscribe') }}">订阅</a></button>
-        {% endif %}
-        </p>
-        {% endif %}
-        <p>查看<a href="{{ url_for('blog.show_post',post_id=now.id)}}">我的近况</a></p>
         
         {% if posts %}
-            <p><b>最近的文章:</b></p>
-            <p style="font-size:16px;font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">&nbsp;<i>"happy wife, happy life."</i></p>
-            <div style="margin-top:20px">
+        <table>
+            <caption>
+              recent Post
+            </caption>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Title</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th colspan="4">wrotedown.fun</th>
+              </tr>
+            </tfoot>
+            <tbody>
                 {% for post in posts %}
-                {% if post.category.name != 'default' %}
-                <p style="margin-top:8px;"><span style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif">{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</span> &nbsp;&nbsp;&nbsp;<a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></p>
-                {% endif %}
-                {% endfor %}
-            </div>
+                <tr>
+                    <th>{{loop.index}}</th>
+                    <td><a href="{{ url_for('blog.show_post',post_id=post.id)}}">{{post.title}}</a></td>
+                    <td>{{(post.timestamp + dt).strftime("%Y.%m.%d")}}</td>
+                </tr>
+                {% endfor %} 
+            </tbody>
+          </table>
         {% else %}
             <div class="tip">
                 <p>这个人很懒,还没写博客...</p>
@@ -46,3 +69,19 @@
     
     
 {% endblock %}
+
+{% block scripts %}
+<script>
+
+  let text = "it is r1cardohj's blog site.";  
+  let index = 0;  
+  let div = document.getElementById('print');   
+  
+  setInterval(function() {  
+    if(index < text.length) {  
+        div.innerHTML += text.charAt(index);  
+        index++;  
+    }  
+  }, 80); 
+</script>
+{% endblock scripts %}

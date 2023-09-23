@@ -1,14 +1,28 @@
 {% extends "base.html" %}
-{% block header %}
-{% endblock header %}
+{% block title %}
+ categories
+{% endblock title %}
 {% block content %}
-<div id="accordion" class="col-sm-12">
-  <h1 class="" >Categories🦝</h1> 
-  <hr>
-  <ul class="tagcloud">
+<h1 id = "print"></h1>
+<ol class="terminal-toc">
 {% for category in  categories %}
-    <li style="font-size: {{category.posts | length * 10 + 100}}%; "><a style="text-decoration:underline" href="{{url_for('blog.show_category',category_id=category.id)}}">{{category.name}}</a></li>
+    <li><a  href="{{url_for('blog.show_category',category_id=category.id)}}">{{category.name}}</a></li>
 {% endfor %}
-</ul>
-</div>
+</ol>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+
+  let text = "Categories";  
+  let index = 0;  
+  let div = document.getElementById('print');   
+  
+  setInterval(function() {  
+    if(index < text.length) {  
+        div.innerHTML += text.charAt(index);  
+        index++;  
+    }  
+  }, 100); 
+</script>
+{% endblock scripts %}

@@ -3,34 +3,45 @@
 {{ super() }}
 {% endblock styles %}
 {% block content %}
-<div class="col-sm-12">
-<div class="card mx-auto  moblie_me">
-    <img class="card-img-top" src="{{ url_for('static',filename='img/yellowbean.jpg') }}" alt="Card image" style="width:100%">
-    <div class="card-body">
-    <h4 class="card-title">{{ admin.name }}</h4>
-    <p class="card-text">{{ admin.about }}
+<h1 id="print"></h1>
+<b>About Me</b>
+    <ul>
+    <li>我是{{ admin.name }}</h4>
+    <li class="card-text">{{ admin.about }}
         {% if current_user.is_authenticated %}
             <a href="{{ url_for('admin.settings')}}" ><i class="fa fa-cog" style="font-size:16px">edit</i></a>
         {% endif %}
-    </p>
-    </div>
-</div>
-<p class="card-text badge badge-secondary mt-5" style="font-size:large;">My project</p>
+    </li>
+    <ul>
+<br>
+<b>My project</b>
 {% for project in projects %}
 <div class="row mt-3" >
-    <div class="col-sm-3">
-        <img src=" {{ url_for('static',filename = 'img/' + project.pic_endpoint + '.jpg' )}}" style="width: 200px;">        
-    </div>
-    <div class="col-sm-9">
-        <h5>{{ project.title }}</h5>
-        <p>{{ project.detail }}</p>
+        <h4 style="margin-top:20px;">{{ project.title }}</h5>
+        <li>{{ project.detail }}</li>
         <p class="badge badge-primary"></p>
-        <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:{{ project.progress }}%" ></div>
+        <div class="progress-bar progress-bar-show-percent">
+        <div class="progress-bar-filled" style="width:{{ project.progress }}%;" data-filled="Loading {{  project.progress }}%"></div>
         </div>
     </div>
 </div>
 {% endfor %}
 </div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+
+    let text = "About";  
+    let index = 0;  
+    let div = document.getElementById('print');   
+    
+    setInterval(function() {  
+      if(index < text.length) {  
+          div.innerHTML += text.charAt(index);  
+          index++;  
+      }  
+    }, 80); 
+  </script>
+{% endblock scripts %}
 

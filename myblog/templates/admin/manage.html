@@ -6,8 +6,7 @@
 
 {% block content %}
 <div class="page-header col-sm-12">
-    <h1>Admin</h1>
-    <hr>
+    <h1 id="print"></h1>
     <ul style="font-size:18px;">
         <li style="margin-top: 20px;"><a  href="{{ url_for('admin.manage_post')}}">我的文章</a></li>
         <li style="margin-top: 20px;"><a  href="{{ url_for('admin.manage_comment') }}">读评论 
@@ -20,3 +19,19 @@
     </ul>
 </div>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+
+    let text = "Manage";  
+    let index = 0;  
+    let div = document.getElementById('print');   
+    
+    setInterval(function() {  
+      if(index < text.length) {  
+          div.innerHTML += text.charAt(index);  
+          index++;  
+      }  
+    }, 80); 
+  </script>
+{% endblock scripts %}

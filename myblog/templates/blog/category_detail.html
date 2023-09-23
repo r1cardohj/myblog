@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col-sm-12">
-    <h1 class="">--{{ category.name }}--</h1>
+<div>
+    <h1 class="">{{ category.name }}</h1>
 <div class="list-group mt-4">
     <ul>
     {% for post in posts %}
