@@ -6,8 +6,9 @@
   </title>
   <meta name="description" content="blog;python;r1cardohj">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="static/t.css" />
+
   {% block styles %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='t.css') }}" />
     <style>
       .pagination li{
         display: inline;  

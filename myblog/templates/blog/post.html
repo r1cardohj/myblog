@@ -1,11 +1,8 @@
 {% extends 'base.html' %}
 {% from 'bootstrap/pagination.html' import render_pagination %}
 {% from 'bootstrap/form.html' import render_form %}
+<link href="https://cdn.staticfile.org/highlight.js/11.8.0/styles/base
 
-{% block styles %}
-{{ super() }}
-<link href="https://cdn.staticfile.org/highlight.js/11.8.0/styles/base16/github.min.css" rel="stylesheet">
-{% endblock styles %}
 {% block title %}
 {{ post.title }}
 {% endblock title %}
